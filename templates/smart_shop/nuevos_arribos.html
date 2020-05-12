@@ -1,0 +1,48 @@
+{% load static %}
+<div class="new_arrivals">
+	<div class="container">
+		<h3><span>ultimos </span>ingresos</h3>
+		<p>Te mostramos toda nuestra nueva mercaderia</p>
+		<div class="new_grids">
+			<div class="col-md-4 new-gd-left">
+				<img src="{% get_media_prefix %}imagenes/ba1.png" alt=" " />
+				<div class="wed-brand simpleCart_shelfItem">
+					<h4>Wedding Collections</h4>
+					<h5>Flat 50% Discount</h5>
+					<p><i>$250</i> <span class="item_price">$500</span><a class="item_add hvr-outline-out button2" href="#">add to cart </a></p>
+				</div>
+			</div>
+			<div class="col-md-4 new-gd-middle">
+				<div class="new-levis">
+					<div class="mid-img">
+						<img src="{%static 'images/levis1.png' %}" alt=" " />
+					</div>
+					<div class="mid-text">
+						<h4>up to 40% <span>off</span></h4>
+						<a class="hvr-outline-out button2" href="{%url 'productos:lista_productos' %}">Shop now </a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="new-levis">
+					<div class="mid-text">
+						<h4>up to 50% <span>off</span></h4>
+						<a class="hvr-outline-out button2" href="product.html">Shop now </a>
+					</div>
+					<div class="mid-img">
+						<img src="{%static 'images/dig.jpg' %}" alt=" " />
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="col-md-4 new-gd-left">
+				<img src="{% get_media_prefix %}imagenes/ba3.png" alt=" " />
+				<div class="wed-brandtwo simpleCart_shelfItem">
+					<h4>Spring / Summer</h4>
+					<p>Shop Men</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
