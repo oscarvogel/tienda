@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 # Create your models here.
@@ -14,6 +16,7 @@ class Localidades(models.Model):
     class Meta:
         managed = False
         db_table = 'localidades'
+        verbose_name_plural = "Localidades"
 
 
 class Tiporesp(models.Model):
@@ -86,6 +89,7 @@ class Marcas(models.Model):
         managed = False
         db_table = 'marcas'
         ordering = ['nombre']
+        verbose_name_plural = "Marcas"
 
     def __str__(self):
         return self.nombre
@@ -97,6 +101,8 @@ class Talles(models.Model):
     class Meta:
         managed = False
         db_table = 'talles'
+        ordering = ['nombre']
+        verbose_name_plural = 'Talles'
 
     def __str__(self):
         return self.nombre
@@ -110,6 +116,7 @@ class Color(models.Model):
         managed = False
         db_table = 'color'
         ordering = ['nombre']
+        verbose_name_plural = 'Colores'
 
     def __str__(self):
         return self.nombre
@@ -121,14 +128,14 @@ class Articulos(models.Model):
     nombreticket = models.CharField(db_column='NombreTicket', max_length=40)  # Field name made lowercase.
     idgrupo = models.ForeignKey('Grupos', models.DO_NOTHING, db_column='idGrupo',
                                 verbose_name='Grupo')  # Field name made lowercase.
-    peso = models.DecimalField(db_column='Peso', max_digits=12, decimal_places=2)  # Field name made lowercase.
+    peso = models.DecimalField(db_column='Peso', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
     provppal = models.ForeignKey('Proveedores', models.DO_NOTHING, db_column='ProvPpal',
                                  verbose_name='Proveedor principal')  # Field name made lowercase.
-    descstock = Bit1BooleanField(db_column='DescStock', verbose_name='Descuenta Stock')  # Field name made lowercase. This field type is a guess.
-    tipoiva = models.ForeignKey('Tipoiva', models.DO_NOTHING, db_column='TipoIva')  # Field name made lowercase.
-    idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca')  # Field name made lowercase.
-    preciopub = models.DecimalField(max_digits=12, decimal_places=2)
-    disponible_web = Bit1BooleanField(default=0, verbose_name = "Disponible venta web")
+    descstock = Bit1BooleanField(db_column='DescStock', verbose_name='Descuenta Stock', default=True)  # Field name made lowercase. This field type is a guess.
+    tipoiva = models.ForeignKey('Tipoiva', models.DO_NOTHING, db_column='TipoIva', default='01')  # Field name made lowercase.
+    idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca', default=1)  # Field name made lowercase.
+    preciopub = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    disponible_web = Bit1BooleanField(default=True, verbose_name = "Disponible venta web")
 
     class Meta:
         managed = False
@@ -142,34 +149,34 @@ class Articulos(models.Model):
 class Stock(models.Model):
     idstock = models.AutoField(db_column='idStock', primary_key=True)  # Field name made lowercase.
     idarticulo = models.ForeignKey('Articulos', models.DO_NOTHING, db_column='idArticulo')  # Field name made lowercase.
-    idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca', default=1, verbose_name='Marca')  # Field name made lowercase.
+    # idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca', default=1, verbose_name='Marca')  # Field name made lowercase.
     idtalle = models.ForeignKey('Talles', models.DO_NOTHING, db_column='idTalle', verbose_name='Talle')  # Field name made lowercase.
     idcolorp = models.ForeignKey('Color', models.DO_NOTHING, db_column='idColorP', default=1, related_name='colorp')  # Field name made lowercase.
     idcolor = models.ForeignKey('Color', models.DO_NOTHING,db_column='idColorS', related_name='colors')  # Field name made lowercase.
-    costo = models.DecimalField(db_column='Costo', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    stock = models.DecimalField(db_column='Stock', max_digits=12, decimal_places=4)  # Field name made lowercase.
-    stockminimo = models.DecimalField(db_column='StockMinimo', max_digits=12, decimal_places=4)  # Field name made lowercase.
-    incre1 = models.DecimalField(db_column='Incre1', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    precio1 = models.DecimalField(db_column='Precio1', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    incre2 = models.DecimalField(db_column='Incre2', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    precio2 = models.DecimalField(db_column='Precio2', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    incre3 = models.DecimalField(db_column='Incre3', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    precio3 = models.DecimalField(db_column='Precio3', max_digits=12, decimal_places=2)  # Field name made lowercase.
-    visible = Bit1BooleanField(db_column='Visible')  # Field name made lowercase. This field type is a guess.
-    descuenta = models.BooleanField(db_column='Descuenta')  # Field name made lowercase.
-    formula = models.CharField(db_column='Formula', max_length=20)  # Field name made lowercase.
-    descstock = models.TextField(db_column='DescStock')  # Field name made lowercase. This field type is a guess.
-    codbarraart = models.CharField(db_column='CodBarraArt', max_length=20)  # Field name made lowercase.
-    codbarrabulto = models.CharField(db_column='CodBarraBulto', max_length=20)  # Field name made lowercase.
-    modificaprecios = Bit1BooleanField(db_column='ModificaPrecios')  # Field name made lowercase. This field type is a guess.
-    imagen = models.CharField(db_column='Imagen', max_length=200)  # Field name made lowercase.
-    ultact = models.DateField(db_column='UltAct')  # Field name made lowercase.
-    preciopub = models.DecimalField(db_column='PrecioPub', max_digits=12, decimal_places=4)  # Field name made lowercase.
-    balanza = models.TextField(db_column='Balanza')  # Field name made lowercase. This field type is a guess.
-    plu = models.IntegerField(db_column='PLU')  # Field name made lowercase.
-    unidad = models.CharField(db_column='Unidad', max_length=8)  # Field name made lowercase.
-    iddivisa = models.PositiveIntegerField()
-    peso = models.DecimalField(db_column='Peso', max_digits=12, decimal_places=2)  # Field name made lowercase.
+    # costo = models.DecimalField(db_column='Costo', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
+    stock = models.DecimalField(db_column='Stock', max_digits=12, decimal_places=4, default=0)  # Field name made lowercase.
+    # stockminimo = models.DecimalField(db_column='StockMinimo', max_digits=12, decimal_places=4, default=0)  # Field name made lowercase.
+    # incre1 = models.DecimalField(db_column='Incre1', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
+    # precio1 = models.DecimalField(db_column='Precio1', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
+    # incre2 = models.DecimalField(db_column='Incre2', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
+    # precio2 = models.DecimalField(db_column='Precio2', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
+    # incre3 = models.DecimalField(db_column='Incre3', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
+    # precio3 = models.DecimalField(db_column='Precio3', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
+    # visible = Bit1BooleanField(db_column='Visible', default=True)  # Field name made lowercase. This field type is a guess.
+    descuenta = Bit1BooleanField(db_column='Descuenta', default=True)  # Field name made lowercase.
+    formula = models.CharField(db_column='Formula', max_length=20, default='')  # Field name made lowercase.
+    # descstock = Bit1BooleanField(db_column='DescStock', default=True)  # Field name made lowercase. This field type is a guess.
+    codbarraart = models.CharField(db_column='CodBarraArt', max_length=20, default='')  # Field name made lowercase.
+    codbarrabulto = models.CharField(db_column='CodBarraBulto', max_length=20, default='')  # Field name made lowercase.
+    # modificaprecios = Bit1BooleanField(db_column='ModificaPrecios', default=True)  # Field name made lowercase. This field type is a guess.
+    imagen = models.CharField(db_column='Imagen', max_length=200, default='')  # Field name made lowercase.
+    ultact = models.DateField(db_column='UltAct', default=datetime.now().date())  # Field name made lowercase.
+    preciopub = models.DecimalField(db_column='PrecioPub', max_digits=12, decimal_places=4, default=0)  # Field name made lowercase.
+    # balanza = Bit1BooleanField(db_column='Balanza', default=True)  # Field name made lowercase. This field type is a guess.
+    plu = models.IntegerField(db_column='PLU', default=0)  # Field name made lowercase.
+    unidad = models.CharField(db_column='Unidad', max_length=8, default='UN')  # Field name made lowercase.
+    iddivisa = models.PositiveIntegerField(default=1)
+    peso = models.DecimalField(db_column='Peso', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
 
     class Meta:
         managed = False

@@ -3,9 +3,15 @@ from django.contrib import admin
 # Register your models here.
 
 
-from apps.productos.models import Articulos, Stock, Grupos, ImagenArticulo
+from apps.productos.models import Articulos, Stock, Grupos, ImagenArticulo, Color
 
 admin.site.site_header = 'Administracion de tablas Tienda'
+
+class ColoresAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    search_fields = ['nombre']
+    list_display = ['idcolor', 'nombre']
+    list_editable = ['nombre']
 
 class GrupoAdmin(admin.ModelAdmin):
     search_fields = ['nombre']
@@ -13,7 +19,13 @@ class GrupoAdmin(admin.ModelAdmin):
 
 class StockAdminInline(admin.TabularInline):
     model = Stock
-    fields = ['idtalle', 'idcolor', 'stock', 'visible']
+    fields = ['idtalle', 'idcolor', 'stock', ]
+
+class StockAdmin(admin.ModelAdmin):
+    list_display = ['idarticulo', 'idcolor', 'idtalle', 'stock']
+    list_per_page = 20
+    search_fields = ['idarticulo__nombre']
+    list_editable = ['stock']
 
 class ImagenProductoInLine(admin.StackedInline):
     model = ImagenArticulo
@@ -27,7 +39,9 @@ class ArticulosAdmin(admin.ModelAdmin):
     list_editable = ('nombre', 'preciopub','disponible_web')
     list_filter = ['idgrupo',]
     inlines = [StockAdminInline, ImagenProductoInLine]
-    exclude = ['nombreticket']
+    exclude = ['nombreticket', 'peso', 'tipoiva', 'descstock',]
 
 admin.site.register(Grupos, GrupoAdmin)
 admin.site.register(Articulos, ArticulosAdmin)
+admin.site.register(Color, ColoresAdmin)
+admin.site.register(Stock, StockAdmin)
