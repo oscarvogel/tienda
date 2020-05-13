@@ -5,6 +5,7 @@ from django.db import models
 # Create your models here.
 from django.utils.safestring import mark_safe
 from django_mysql.models import Bit1BooleanField
+from colorfield.fields import ColorField
 
 
 class Localidades(models.Model):
@@ -111,6 +112,7 @@ class Color(models.Model):
     idcolor = models.AutoField(db_column='idColor', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', max_length=100)  # Field name made lowercase.
     color = models.PositiveIntegerField()
+    color_web = ColorField(default='#FFFFF')
 
     class Meta:
         managed = False

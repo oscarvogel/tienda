@@ -10,8 +10,9 @@ admin.site.site_header = 'Administracion de tablas Tienda'
 class ColoresAdmin(admin.ModelAdmin):
     list_per_page = 20
     search_fields = ['nombre']
-    list_display = ['idcolor', 'nombre']
-    list_editable = ['nombre']
+    list_display = ['idcolor', 'nombre', 'color_web']
+    list_editable = ['nombre', 'color_web']
+    exclude = ['color']
 
 class GrupoAdmin(admin.ModelAdmin):
     search_fields = ['nombre']
