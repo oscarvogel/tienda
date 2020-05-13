@@ -7,10 +7,12 @@ def paramsist_processors(request):
     whatsapp = Paramsist.ObtenerValor("WHATSAPP")
     whatsapp_link = whatsapp.replace("+","").replace("-","").replace(" ", "")
     email = Paramsist.ObtenerValor("EMAIL")
+    ig_url = Paramsist.ObtenerValor("URL_IG")
     return {
         'fb_url': fb_url,
         'logo': logo,
         'email': email,
         'whatsapp': whatsapp,
         'whatsapp_link': whatsapp_link,
+        'ig_url': ig_url,
     }

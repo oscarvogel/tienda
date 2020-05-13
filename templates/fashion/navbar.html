@@ -1,0 +1,16 @@
+{% load static %}
+<nav class="nav-menu mobile-menu">
+    <ul>
+        <li class="active"><a href="{%url 'inicio:inicio' %}">Inicio</a></li>
+        <li><a href="{%url 'productos:lista_productos' %}}">Tienda</a></li>
+        <li><a href="#">Colecciones</a>
+            <ul class="dropdown">
+                <li><a href="#">Hombre</a></li>
+                <li><a href="#">Mujeres</a></li>
+                <li><a href="#">Niños</a></li>
+            </ul>
+        </li>
+        <li><a href="./blog.html">Blog</a></li>
+        <li><a href="./contact.html">Contactanos</a></li>
+    </ul>
+</nav>
