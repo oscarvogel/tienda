@@ -192,6 +192,3 @@ class ImagenArticulo(models.Model):
         return mark_safe('<img src="{}" width="50%" height="50%" />'.format(self.imagen.url))
 
     imagen_tag.short_description = 'Imagen'
-
-    def __str__(self):
-        return self.imagen
