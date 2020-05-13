@@ -22,6 +22,7 @@ class ArticulosAdmin(admin.ModelAdmin):
     list_editable = ('nombre', 'preciopub')
     list_filter = ['idgrupo',]
     inlines = [StockAdminInline,]
+    exclude = ['nombreticket']
 
 admin.site.register(Grupos, GrupoAdmin)
 admin.site.register(Articulos, ArticulosAdmin)

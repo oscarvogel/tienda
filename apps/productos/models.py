@@ -112,6 +112,7 @@ class Color(models.Model):
 
 class Articulos(models.Model):
     idarticulo = models.AutoField(db_column='idArticulo', primary_key=True)  # Field name made lowercase.
+    descripcion = models.TextField(default='')
     nombre = models.CharField(db_column='Nombre', max_length=100)  # Field name made lowercase.
     nombreticket = models.CharField(db_column='NombreTicket', max_length=40)  # Field name made lowercase.
     idgrupo = models.ForeignKey('Grupos', models.DO_NOTHING, db_column='idGrupo',
