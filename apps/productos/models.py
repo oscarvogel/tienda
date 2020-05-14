@@ -138,6 +138,7 @@ class Articulos(models.Model):
     idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca', default=1)  # Field name made lowercase.
     preciopub = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     disponible_web = Bit1BooleanField(default=True, verbose_name = "Disponible venta web")
+    ult_act = models.DateField(default=datetime.now())
 
     class Meta:
         managed = False

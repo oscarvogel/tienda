@@ -32,13 +32,15 @@ class Paramsist(models.Model):
 class Secciones(models.Model):
     TIPO_SECCION = (
         ('B2', 'Banner principal'),
-        ('S1', 'Seccion Uno')
+        ('S1', 'Seccion Uno'),
+        ('S2', 'Seccion Dos'),
     )
     nombre = models.CharField(max_length=100, default='')
     tipo_seccion = models.CharField(max_length=2, default='', choices=TIPO_SECCION)
     descripcion = models.TextField(default='', blank=True)
     activo = models.BooleanField(default=True)
     orden = models.PositiveIntegerField(default=0)
+    template = models.CharField(default='', max_length=200)
 
     class Meta:
         ordering = ['nombre']

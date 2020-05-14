@@ -38,9 +38,12 @@ class ArticulosAdmin(admin.ModelAdmin):
     search_fields = ('nombre','idgrupo__nombre')
     list_display = ('idarticulo','nombre','preciopub', 'idgrupo', 'disponible_web')
     list_editable = ('nombre', 'preciopub','disponible_web')
-    list_filter = (('idgrupo', RelatedDropdownFilter),)
+    list_filter = (
+        ('idgrupo', RelatedDropdownFilter),
+        'disponible_web'
+    )
     inlines = [StockAdminInline, ImagenProductoInLine]
-    exclude = ['nombreticket', 'peso', 'tipoiva', 'descstock',]
+    exclude = ['nombreticket', 'peso', 'tipoiva', 'descstock', 'ult_act']
 
 admin.site.register(Grupos, GrupoAdmin)
 admin.site.register(Articulos, ArticulosAdmin)

@@ -1,15 +1,15 @@
 {% load static %}
 <section class="hero-section">
     <div class="hero-items owl-carousel">
-        <div class="single-hero-items set-bg" data-setbg="{%static 'fashion/img/hero-1.jpeg'%}">
+        {% for h in hero.detallesecciones_set.all %}
+        <div class="single-hero-items set-bg" data-setbg="{{h.imagen.url}}">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
-                        <span>Bag,kids</span>
-                        <h1>Black friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="primary-btn">Shop Now</a>
+                        <span></span>
+                        <h1>{{h.titulo}}</h1>
+                        <p>{{h.detalle}}</p>
+                        <a href="#" class="primary-btn">Compra Ahora</a>
                     </div>
                 </div>
                 <div class="off-card">
@@ -17,37 +17,6 @@
                 </div>
             </div>
         </div>
-        <div class="single-hero-items set-bg" data-setbg="{%static 'fashion/img/hero-2.jpeg' %}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <span>Bag,kids</span>
-                        <h1>Black friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="primary-btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="off-card">
-                    <h2>Compra <span>hoy</span></h2>
-                </div>
-            </div>
-        </div>
-        <div class="single-hero-items set-bg" data-setbg="{%static 'fashion/img/hero-3.jpeg' %}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <span>Bag,kids</span>
-                        <h1>Black friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="primary-btn">Shop Now</a>
-                    </div>
-                </div>
-                <div class="off-card">
-                    <h2>Compra <span>hoy</span></h2>
-                </div>
-            </div>
-        </div>
+        {%endfor%}
     </div>
 </section>
