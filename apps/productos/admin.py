@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-
+from django_admin_listfilter_dropdown.filters import RelatedDropdownFilter
 
 from apps.productos.models import Articulos, Stock, Grupos, ImagenArticulo, Color
 
@@ -38,7 +38,7 @@ class ArticulosAdmin(admin.ModelAdmin):
     search_fields = ('nombre','idgrupo__nombre')
     list_display = ('idarticulo','nombre','preciopub', 'idgrupo', 'disponible_web')
     list_editable = ('nombre', 'preciopub','disponible_web')
-    list_filter = ['idgrupo',]
+    list_filter = (('idgrupo', RelatedDropdownFilter),)
     inlines = [StockAdminInline, ImagenProductoInLine]
     exclude = ['nombreticket', 'peso', 'tipoiva', 'descstock',]
 
