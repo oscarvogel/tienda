@@ -31,14 +31,13 @@ SECRET_KEY = 'zbt+&95jz5($(zgfott^o#@88wu+e5zqn$mp$7jk-(3yc$$-7y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

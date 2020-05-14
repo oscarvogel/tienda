@@ -27,3 +27,21 @@ class Paramsist(models.Model):
 
         return retorno
     
+class Secciones(models.Model):
+    TIPO_SECCION = (
+        ('B2', 'Banner principal'),
+        ('S1', 'Seccion Uno')
+    )
+    nombre = models.CharField(max_length=100, default='')
+    tipo_seccion = models.CharField(max_length=2, default='', choices=TIPO_SECCION)
+
+    class Meta:
+        ordering = ['nombre']
+        verbose_name = 'Seccion'
+        verbose_name_plural = 'Secciones'
+
+class DetalleSecciones(models.Model):
+
+    seccion = models.ForeignKey(Secciones, models.DO_NOTHING)
+    titulo = models.CharField(max_length=100, default='')
+    detalle = models.TextField(default='', blank=True)
