@@ -34,6 +34,7 @@ class Secciones(models.Model):
     )
     nombre = models.CharField(max_length=100, default='')
     tipo_seccion = models.CharField(max_length=2, default='', choices=TIPO_SECCION)
+    descripcion = models.TextField(default='', blank=True)
 
     class Meta:
         ordering = ['nombre']
@@ -45,3 +46,4 @@ class DetalleSecciones(models.Model):
     seccion = models.ForeignKey(Secciones, models.DO_NOTHING)
     titulo = models.CharField(max_length=100, default='')
     detalle = models.TextField(default='', blank=True)
+    articulo = models.PositiveIntegerField(default=0, blank=True)
