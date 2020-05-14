@@ -30,7 +30,7 @@ class StockAdmin(admin.ModelAdmin):
 
 class ImagenProductoInLine(admin.StackedInline):
     model = ImagenArticulo
-    fields = ['imagen', 'imagen_tag']
+    fields = ['imagen', 'imagen_tag', 'principal']
     readonly_fields = ['imagen_tag']
 
 class ArticulosAdmin(admin.ModelAdmin):

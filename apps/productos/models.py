@@ -192,6 +192,7 @@ class Stock(models.Model):
 class ImagenArticulo(models.Model):
     producto = models.ForeignKey(Articulos, models.DO_NOTHING)
     imagen = models.ImageField(upload_to='articulos/', blank=True)
+    principal = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Imagen Articulo'
