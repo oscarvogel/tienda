@@ -3,6 +3,8 @@ from django.db import models
 # Create your models here.
 from django.utils.safestring import mark_safe
 
+from apps.productos.models import Articulos
+
 
 class Paramsist(models.Model):
     idparamsist = models.AutoField(db_column='idParamSist', primary_key=True)  # Field name made lowercase.
@@ -41,6 +43,7 @@ class Secciones(models.Model):
     activo = models.BooleanField(default=True)
     orden = models.PositiveIntegerField(default=0)
     template = models.CharField(default='', max_length=200)
+    imagen = models.ImageField(upload_to='portadas/', blank=True)
 
     class Meta:
         ordering = ['nombre']
@@ -50,12 +53,17 @@ class Secciones(models.Model):
     def __str__(self):
         return self.nombre
 
+    def imagen_tag(self):
+        return mark_safe('<img src="{}" width="50%" height="50%" />'.format(self.imagen.url))
+
+    imagen_tag.short_description = 'Imagen'
+
 class DetalleSecciones(models.Model):
 
     seccion = models.ForeignKey(Secciones, models.DO_NOTHING)
     titulo = models.CharField(max_length=100, default='')
     detalle = models.TextField(default='', blank=True)
-    articulo = models.PositiveIntegerField(default=0, blank=True)
+    articulo = models.ForeignKey(Articulos, models.DO_NOTHING, db_column='articulo')
     imagen = models.ImageField(upload_to='portadas/', blank=True)
 
     class Meta:

@@ -11,11 +11,13 @@ class ParamsistAdmin(admin.ModelAdmin):
 class DetalleSeccionesInLine(admin.StackedInline):
     model = DetalleSecciones
     fields = ['titulo', 'imagen', 'imagen_tag', 'detalle', 'articulo']
+    raw_id_fields = ['articulo']
     readonly_fields = ['imagen_tag']
 
 class SeccionesAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'tipo_seccion')
     search_fields = ('nombre',)
+    readonly_fields = ['imagen_tag']
     inlines = [DetalleSeccionesInLine]
 
 admin.site.register(Paramsist, ParamsistAdmin)

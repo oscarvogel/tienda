@@ -3,6 +3,7 @@ from datetime import datetime
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django_mysql.models import Bit1BooleanField
 from colorfield.fields import ColorField
@@ -148,6 +149,19 @@ class Articulos(models.Model):
 
     def __str__(self):
         return self.nombre
+
+    def get_absolute_url(self):
+        return reverse('productos:get_producto', kwargs={'producto': self.idarticulo})
+
+    def get_principal_image(self):
+        
+        try:
+            imagen = ImagenArticulo.objects.get(producto=self.idarticulo, principal=True)
+            url = imagen.imagen.url
+        except:
+            url = ''
+        print(f"url de la imagen {url}")
+        return url
 
 class Stock(models.Model):
     idstock = models.AutoField(db_column='idStock', primary_key=True)  # Field name made lowercase.

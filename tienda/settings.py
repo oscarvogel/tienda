@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'colorfield',
+    'django_admin_listfilter_dropdown',
     'apps.inicio',
     'apps.productos',
 ]

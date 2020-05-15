@@ -12,8 +12,10 @@ from apps.inicio.models import Paramsist, Secciones
 def inicio(request):
     template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "index.html")
     hero = Secciones.objects.get(tipo_seccion = 'B2')
+    banner_1 = Secciones.objects.get(tipo_seccion = 'S2')
     return render(request, template_name=template, context={
-        'hero':hero
+        'hero': hero,
+        'banner_1': banner_1,
     })
 
 def login_propio(request):
@@ -38,3 +40,4 @@ def login_propio(request):
 
     # Si llegamos al final renderizamos el formulario
     return render(request, "index.html", {'form': form})
+
