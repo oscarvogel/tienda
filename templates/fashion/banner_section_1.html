@@ -18,7 +18,7 @@
                     {%for b in banner_1.detallesecciones_set.all%}
                     <div class="product-item">
                         <div class="pi-pic">
-                            {%if b.imagen.url%}
+                            {%if b.imagen%}
                                 <img src="{{b.imagen.url}}" alt="">
                             {%else%}
                                 <img src="{{b.articulo.get_principal_image}}" alt="{{b.articulo.nombre}}">
