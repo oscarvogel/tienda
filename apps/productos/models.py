@@ -153,15 +153,24 @@ class Articulos(models.Model):
     def get_absolute_url(self):
         return reverse('productos:get_producto', kwargs={'producto': self.idarticulo})
 
+    #devuelve la url de la imagen principal
     def get_principal_image(self):
-        
         try:
             imagen = ImagenArticulo.objects.get(producto=self.idarticulo, principal=True)
             url = imagen.imagen.url
         except:
             url = ''
-        print(f"url de la imagen {url}")
+
         return url
+
+    def get_price_increment(self):
+        try:
+            precio = float(self.preciopub) + float(self.preciopub) * 30 /100
+        except:
+            precio = 0
+
+        return precio
+
 
 class Stock(models.Model):
     idstock = models.AutoField(db_column='idStock', primary_key=True)  # Field name made lowercase.
