@@ -18,7 +18,11 @@
                     {%for b in banner_1.detallesecciones_set.all%}
                     <div class="product-item">
                         <div class="pi-pic">
-                            <img src="{{b.imagen.url}}" alt="">
+                            {%if b.imagen.url%}
+                                <img src="{{b.imagen.url}}" alt="">
+                            {%else%}
+                                <img src="{{b.articulo.get_principal_image}}" alt="{{b.articulo.nombre}}">
+                            {%endif%}
                             <div class="sale">Venta</div>
                             <div class="icon">
                                 <i class="icon_heart_alt"></i>
