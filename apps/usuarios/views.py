@@ -32,8 +32,7 @@ def login_propio(request):
             else:
                 messages.error(request, "Contraseña o usuario no valido. Verifique!!!")
         else:
-            for e in form.error_messages:
-                messages.error(request, e)
+            print(form.errors)
 
     # Si llegamos al final renderizamos el formulario
     return render(request, template, {'form': form})
