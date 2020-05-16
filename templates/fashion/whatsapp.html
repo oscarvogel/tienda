@@ -1,27 +1,23 @@
-<!-- WhatsChat.co widget -->
+{%load static%}
+<style>
+*{padding:0;margin:0;}
 
-<script type="text/javascript">
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
 
-(function () {var options = {
-
-whatsapp: "5493743500562", // WhatsApp number
-
-position: "right", // Position may be 'right' or 'left'.
-
-image: "", //Image to display. Leave blank to display whatsapp defualt icon
-
-text:"Obtener Botón",
-
-link_to:"https://whatschat.co"};
-
-var proto = document.location.protocol, host = "https://whatschat.co", url = host;
-
-var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/whatsapp/init4.js';
-
-s.onload = function () { getbutton(host, proto, options); };
-
-var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-
-})();</script>
-
-<!-- WhatsChat.co widget -->
+.my-float{
+	margin-top:22px;
+}
+</style>
+<a href="https://wa.me/{{whatsapp_link}}?text=Hola%20desearia%20saber%20el%20precio%20de%20" class="float">
+<i class="fa fa-whatsapp my-float"></i>
