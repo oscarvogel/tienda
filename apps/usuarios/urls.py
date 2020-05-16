@@ -6,4 +6,5 @@ app_name = 'usuarios'
 
 urlpatterns = [
     path('', views.login_propio, name='login'),
+    path('logout/', views.user_logout, name='logout'),
 ]

@@ -1,12 +1,15 @@
 from os.path import join
 
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as do_login
 
 # Create your views here.
+from django.urls import reverse
+
 from apps.inicio.models import Paramsist
 
 
@@ -37,3 +40,6 @@ def login_propio(request):
     # Si llegamos al final renderizamos el formulario
     return render(request, template, {'form': form})
 
+def user_logout(request):
+    logout(request)
+    return redirect('/')
