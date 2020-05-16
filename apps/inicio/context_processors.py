@@ -1,4 +1,5 @@
 from apps.inicio.models import Paramsist
+from apps.productos.models import Grupos, Marcas
 
 
 def paramsist_processors(request):
@@ -11,6 +12,8 @@ def paramsist_processors(request):
     url_consulta_wsp = "https://wa.me/{}?text=Hola%20desearia%20saber%20el%20precio%20de%20".format(
         whatsapp_link
     )
+    categorias = Grupos.objects.filter(habilita_web = True)
+    marcas = Marcas.objects.filter(habilita_web = True)
     return {
         'fb_url': fb_url,
         'logo': logo,
@@ -18,5 +21,7 @@ def paramsist_processors(request):
         'whatsapp': whatsapp,
         'whatsapp_link': whatsapp_link,
         'ig_url': ig_url,
-        'url_consulta_wsp': url_consulta_wsp
+        'url_consulta_wsp': url_consulta_wsp,
+        'categorias': categorias,
+        'marcas': marcas
     }

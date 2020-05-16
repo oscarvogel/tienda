@@ -41,11 +41,14 @@ class Grupos(models.Model):
     idgrupo = models.AutoField(db_column='idGrupo', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', max_length=50)  # Field name made lowercase.
     porcentaje = models.DecimalField(db_column='Porcentaje', max_digits=12, decimal_places=2)  # Field name made lowercase.
+    habilita_web = Bit1BooleanField(default=False)
 
     class Meta:
         managed = False
         db_table = 'grupos'
         ordering = ['nombre']
+        verbose_name = 'Grupo'
+        verbose_name_plural = 'Grupos'
 
     def __str__(self):
         return self.nombre
@@ -86,6 +89,7 @@ class Tipoiva(models.Model):
 class Marcas(models.Model):
     idmarca = models.AutoField(db_column='idMarca', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(max_length=100)
+    habilita_web = Bit1BooleanField(default=0)
 
     class Meta:
         managed = False
@@ -140,6 +144,7 @@ class Articulos(models.Model):
     preciopub = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     disponible_web = Bit1BooleanField(default=True, verbose_name = "Disponible venta web")
     ult_act = models.DateField(default=datetime.now())
+    etiqueta = models.CharField(max_length=200, blank=True)
 
     class Meta:
         managed = False
@@ -170,7 +175,6 @@ class Articulos(models.Model):
             precio = 0
 
         return precio
-
 
 class Stock(models.Model):
     idstock = models.AutoField(db_column='idStock', primary_key=True)  # Field name made lowercase.

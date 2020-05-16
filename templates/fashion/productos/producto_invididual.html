@@ -7,7 +7,9 @@
     <section class="product-shop spad page-details">
         <div class="container">
             <div class="row">
+                <div class="col-lg-3">
                 {%include 'fashion/productos/filter_widget.html' %}
+                </div>
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-6">
@@ -20,7 +22,7 @@
                             <div class="product-thumbs">
                                 <div class="product-thumbs-track ps-slider owl-carousel">
                                     {%for img in articulo.imagenarticulo_set.all%}
-                                    <div class="pt active" data-imgbigurl="img/product-single/product-1.jpg"><img
+                                    <div class="pt active" data-imgbigurl="{{img.imagen.url}}"><img
                                             src="{{img.imagen.url}}" alt=""></div>
                                     {%endfor%}
                                 </div>
@@ -48,54 +50,38 @@
                                 <div class="pd-color">
                                     <h6>Color</h6>
                                     <div class="pd-color-choose">
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-black">
-                                            <label for="cc-black"></label>
-                                        </div>
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-yellow">
-                                            <label for="cc-yellow" class="cc-yellow"></label>
-                                        </div>
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-violet">
-                                            <label for="cc-violet" class="cc-violet"></label>
-                                        </div>
+                                        {%for img in articulo.stock_set.all%}
+                                            <div class="cc-item">
+                                                <input type="radio" id="cc-black">
+                                                <label for="cc-black"></label>
+                                            </div>
+                                        {%endfor%}
                                     </div>
                                 </div>
                                 <div class="pd-size-choose">
-                                    <div class="sc-item">
-                                        <input type="radio" id="sm-size">
-                                        <label for="sm-size">s</label>
-                                    </div>
-                                    <div class="sc-item">
-                                        <input type="radio" id="md-size">
-                                        <label for="md-size">m</label>
-                                    </div>
-                                    <div class="sc-item">
-                                        <input type="radio" id="lg-size">
-                                        <label for="lg-size">l</label>
-                                    </div>
-                                    <div class="sc-item">
-                                        <input type="radio" id="xl-size">
-                                        <label for="xl-size">xs</label>
-                                    </div>
+                                    {%for img in articulo.stock_set.all%}
+                                        <div class="sc-item">
+                                            <input type="radio" id="sm-size">
+                                            <label for="sm-size">s</label>
+                                        </div>
+                                    {%endfor%}
                                 </div>
                                 <div class="quantity">
                                     <div class="pro-qty">
                                         <input type="text" value="1">
                                     </div>
-                                    <a href="#" class="primary-btn pd-cart">Agrega al carrito</a>
+                                    <a href="#" class="primary-btn pd-cart">Agregar</a>
                                 </div>
                                 <ul class="pd-tags">
-                                    <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>
-                                    <li><span>TAGS</span>: Clothing, T-shirt, Woman</li>
+                                    <li><span>Categorias</span>: More Accessories, Wallets & Cases</li>
+                                    <li><span>Etiquetas</span>: Clothing, T-shirt, Woman</li>
                                 </ul>
                                 <div class="pd-share">
                                     <div class="p-code">ID : {{articulo.idarticulo}}</div>
                                     <div class="pd-social">
                                         <a href="#"><i class="ti-facebook"></i></a>
-                                        <a href="#"><i class="ti-twitter-alt"></i></a>
-                                        <a href="#"><i class="ti-linkedin"></i></a>
+                                        <a href="#"><i class="ti-instagram"></i></a>
+                                        <a href="#"><i class="ti-whatsapp"></i></a>
                                     </div>
                                 </div>
                             </div>

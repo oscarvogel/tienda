@@ -2,11 +2,22 @@ from os.path import join
 
 from django.shortcuts import render
 # Create your views here.
+from apps.inicio.forms import SearchForm
 from apps.inicio.models import Paramsist, Secciones
+from apps.productos.models import Articulos
 
 
 def inicio(request):
-    template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "index.html")
+    form_busqueda = SearchForm()
+    articulos = None
+    if request.method == 'POST':
+        form_busqueda = SearchForm(request.POST)
+        if form_busqueda.is_valid():
+            cd = form_busqueda.cleaned_data
+            articulos = Articulos.objects.filter(nombre__icontains = cd['search_field'], disponible_web = True)
+            template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "productos", "lista_productos.html")
+    else:
+        template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "index.html")
     try:
         hero = Secciones.objects.get(tipo_seccion = 'B2', activo=True)
     except:
@@ -24,5 +35,7 @@ def inicio(request):
         'hero': hero,
         'banner_1': banner_1,
         'banner_2': banner_2,
+        'articulos': articulos,
+        'form': form_busqueda,
     })
 

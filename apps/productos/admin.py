@@ -3,9 +3,15 @@ from django.contrib import admin
 # Register your models here.
 from django_admin_listfilter_dropdown.filters import RelatedDropdownFilter
 
-from apps.productos.models import Articulos, Stock, Grupos, ImagenArticulo, Color
+from apps.productos.models import Articulos, Stock, Grupos, ImagenArticulo, Color, Marcas
 
 admin.site.site_header = 'Administracion de tablas Tienda'
+
+class MarcasAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    search_fields = ['nombre']
+    list_display = ['idmarca', 'nombre', 'habilita_web']
+    list_editable = ['nombre', 'habilita_web']
 
 class ColoresAdmin(admin.ModelAdmin):
     list_per_page = 20
@@ -16,7 +22,9 @@ class ColoresAdmin(admin.ModelAdmin):
 
 class GrupoAdmin(admin.ModelAdmin):
     search_fields = ['nombre']
-    model = Grupos
+    list_per_page = 20
+    list_display = ['idgrupo', 'nombre', 'habilita_web']
+    list_editable = ['nombre', 'habilita_web']
 
 class StockAdminInline(admin.TabularInline):
     model = Stock
@@ -36,8 +44,8 @@ class ImagenProductoInLine(admin.StackedInline):
 class ArticulosAdmin(admin.ModelAdmin):
     list_per_page = 20
     search_fields = ('nombre','idgrupo__nombre')
-    list_display = ('idarticulo','nombre','preciopub', 'idgrupo', 'disponible_web')
-    list_editable = ('nombre', 'preciopub','disponible_web')
+    list_display = ('idarticulo','nombre','preciopub', 'disponible_web', 'etiqueta')
+    list_editable = ('nombre', 'preciopub','disponible_web', 'etiqueta')
     list_filter = (
         ('idgrupo', RelatedDropdownFilter),
         'disponible_web'
@@ -49,3 +57,4 @@ admin.site.register(Grupos, GrupoAdmin)
 admin.site.register(Articulos, ArticulosAdmin)
 admin.site.register(Color, ColoresAdmin)
 admin.site.register(Stock, StockAdmin)
+admin.site.register(Marcas, MarcasAdmin)

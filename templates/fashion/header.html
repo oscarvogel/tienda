@@ -37,13 +37,16 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
-                    <div class="advanced-search">
-                        <button type="button" class="category-btn">Categorias</button>
-                        <div class="input-group">
-                            <input type="text" placeholder="Que necesitas?">
-                            <button type="button"><i class="ti-search"></i></button>
+                    <form action=""method="post">
+                        {% csrf_token %}
+                        <div class="advanced-search">
+                            <button type="button" class="category-btn">Categorias</button>
+                            <div class="input-group">
+                                {{form.search_field}}
+                                <button type="submit"><i class="ti-search"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
@@ -112,14 +115,7 @@
                     <i class="ti-menu"></i>
                     <span>Todo</span>
                     <ul class="depart-hover">
-                        <li class="active"><a href="#">Ropa Mujer</a></li>
-                        <li><a href="#">Ropa Hombre</a></li>
-                        <li><a href="#">Underwear</a></li>
-                        <li><a href="#">Kid's Clothing</a></li>
-                        <li><a href="#">Brand Fashion</a></li>
-                        <li><a href="#">Accessories/Shoes</a></li>
-                        <li><a href="#">Luxury Brands</a></li>
-                        <li><a href="#">Brand Outdoor Apparel</a></li>
+                        {%include 'fashion/productos/categorias.html'%}
                     </ul>
                 </div>
             </div>
