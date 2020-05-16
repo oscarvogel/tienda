@@ -18,26 +18,3 @@ def inicio(request):
         'banner_1': banner_1,
     })
 
-def login_propio(request):
-    form = AuthenticationForm()
-    if request.method == "POST":
-        # Añadimos los datos recibidos al formulario
-        form = AuthenticationForm(data=request.POST)
-        # Si el formulario es válido...
-        if form.is_valid():
-            # Recuperamos las credenciales validadas
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            # Verificamos las credenciales del usuario
-            user = authenticate(username=username, password=password)
-
-            # Si existe un usuario con ese nombre y contraseña
-            if user is not None:
-                return redirect('/')
-            else:
-                messages.error(request, "Contraseña o usuario no valido. Verifique!!!")
-
-    # Si llegamos al final renderizamos el formulario
-    return render(request, "index.html", {'form': form})
-

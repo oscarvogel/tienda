@@ -24,6 +24,7 @@ from tienda import settings
 urlpatterns = [
     path('', include('apps.inicio.urls', namespace='inicio')),
     path('productos/', include('apps.productos.urls', namespace='productos')),
+    path('usuarios/', include('apps.usuarios.urls', namespace='usuarios')),
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

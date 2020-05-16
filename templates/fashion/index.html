@@ -37,6 +37,8 @@
 
     <!-- Header Section Begin -->
     {%include 'fashion/header.html' %}
+
+    {%include 'fashion/error_messages.html' %}
     <!-- Header End -->
     {%block content%}
 
@@ -77,6 +79,7 @@
     {% include 'fashion/footer.html' %}
     <!-- Footer Section End -->
 
+    {%include 'fashion/whatsapp.html' %}
     <!-- Js Plugins -->
     <script src="{%static 'fashion/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{%static 'fashion/js/bootstrap.min.js' %}"></script>

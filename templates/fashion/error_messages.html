@@ -1,0 +1,10 @@
+{%load static%}
+<div class="container">
+    {%block messages%}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning">{{ message|safe }}</div>
+            {% endfor %}
+        {% endif %}
+    {%endblock%}
+</div>
