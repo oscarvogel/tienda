@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 # Create your models here.
@@ -36,6 +38,7 @@ class Secciones(models.Model):
         ('B2', 'Banner principal'),
         ('S1', 'Seccion Uno'),
         ('S2', 'Seccion Dos'),
+        ('OF', 'Seccion de ofertas')
     )
     nombre = models.CharField(max_length=100, default='')
     tipo_seccion = models.CharField(max_length=2, default='', choices=TIPO_SECCION)
@@ -44,6 +47,7 @@ class Secciones(models.Model):
     orden = models.PositiveIntegerField(default=0)
     template = models.CharField(default='', max_length=200)
     imagen = models.ImageField(upload_to='portadas/', blank=True)
+    finaliza = models.DateTimeField(default=datetime.now())
 
     class Meta:
         ordering = ['nombre']

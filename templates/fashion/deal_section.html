@@ -1,35 +1,65 @@
 {% load static %}
-<section class="deal-of-week set-bg spad" data-setbg="{%static 'fashion/img/time-bg.jpg' %}">
+<script>
+function makeTimer() {
+   var endTime=new Date({{ ofertas.finaliza|date:"U" }} * 1000);
+   console.log("entra" + endTime);
+    endTime = (Date.parse(endTime) / 1000);
+
+        var now = new Date();
+        now = (Date.parse(now) / 1000);
+
+        var timeLeft = endTime - now;
+
+        var days = Math.floor(timeLeft / 86400);
+        var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+        var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+        var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+        if (hours < "10") { hours = "0" + hours; }
+        if (minutes < "10") { minutes = "0" + minutes; }
+        if (seconds < "10") { seconds = "0" + seconds; }
+
+        $("#days").html(days);
+        $("#hours").html(hours);
+        $("#minutes").html(minutes);
+        $("#seconds").html(seconds);
+
+}
+
+setInterval(function() { makeTimer(); }, 1000);
+</script>
+<section class="deal-of-week set-bg spad" data-setbg="{{ofertas.imagen.url}}">
     <div class="container">
         <div class="col-lg-6 text-center">
             <div class="section-title">
-                <h2>Deal Of The Week</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br /> do ipsum dolor sit amet,
-                    consectetur adipisicing elit </p>
-                <div class="product-price">
-                    $35.00
-                    <span>/ HanBag</span>
-                </div>
+                <h2>{{ofertas.nombre}}</h2>
+                <p>{{ofertas.descripcion}} </p>
+                {%for a in ofertas.detallesecciones_set.all%}
+                    <div class="product-price">
+                        {{a.articulo.preciopub}}
+                        <span>{{a.articulo.nombre}}</span>
+                    </div>
+                {%endfor%}
             </div>
-            <div class="countdown-timer" id="countdown">
+            <div class="countdown-timer" >
                 <div class="cd-item">
-                    <span>56</span>
-                    <p>Days</p>
+                    <span id="days"></span>
+                    <p>Dias</p>
                 </div>
                 <div class="cd-item">
-                    <span>12</span>
+                    <span id="hours"></span>
                     <p>Hrs</p>
                 </div>
                 <div class="cd-item">
-                    <span>40</span>
-                    <p>Mins</p>
+                    <span id="minutes"></span>
+                    <p>Min</p>
                 </div>
                 <div class="cd-item">
-                    <span>52</span>
-                    <p>Secs</p>
+                    <span id="seconds"></span>
+                    <p>Seg</p>
                 </div>
             </div>
-            <a href="#" class="primary-btn">Shop Now</a>
+            <a href="#" class="primary-btn">Compralo ahora</a>
         </div>
     </div>
 </section>

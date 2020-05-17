@@ -30,12 +30,16 @@ def inicio(request):
         banner_2 = Secciones.objects.get(tipo_seccion = 'S2')
     except:
         banner_2 = None
-
+    try:
+        ofertas = Secciones.objects.get(tipo_seccion = 'OF')
+    except:
+        ofertas = None
     return render(request, template_name=template, context={
         'hero': hero,
         'banner_1': banner_1,
         'banner_2': banner_2,
         'articulos': articulos,
         'form': form_busqueda,
+        'ofertas': ofertas
     })
 
