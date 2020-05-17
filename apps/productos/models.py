@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -230,3 +231,12 @@ class ImagenArticulo(models.Model):
         return mark_safe('<img src="{}" width="50%" height="50%" />'.format(self.imagen.url))
 
     imagen_tag.short_description = 'Imagen'
+
+class Historial(models.Model):
+    fecha = models.DateTimeField(default=datetime.now())
+    articulo = models.ForeignKey(Articulos, models.DO_NOTHING)
+    usuario = models.ForeignKey(User, models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = 'Historial'
+        verbose_name_plural = 'Historial'
