@@ -47,9 +47,11 @@ INSTALLED_APPS = [
     'colorfield',
     'mathfilters',
     'django_admin_listfilter_dropdown',
+    'tinymce',
     'apps.inicio',
     'apps.productos',
     'apps.usuarios',
+    'apps.blog',
 ]
 
 MIDDLEWARE = [

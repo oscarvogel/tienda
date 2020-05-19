@@ -117,7 +117,7 @@ class Talles(models.Model):
 class Color(models.Model):
     idcolor = models.AutoField(db_column='idColor', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', max_length=100)  # Field name made lowercase.
-    color = models.PositiveIntegerField()
+    color = models.PositiveIntegerField(default=0)
     color_web = ColorField(default='#FFFFF')
 
     class Meta:
