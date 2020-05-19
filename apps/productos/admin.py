@@ -48,6 +48,7 @@ class ArticulosAdmin(admin.ModelAdmin):
     list_editable = ('nombre', 'preciopub','disponible_web', 'etiqueta')
     list_filter = (
         ('idgrupo', RelatedDropdownFilter),
+        ('idmarca', RelatedDropdownFilter),
         'disponible_web'
     )
     inlines = [StockAdminInline, ImagenProductoInLine]

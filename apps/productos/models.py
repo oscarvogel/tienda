@@ -141,8 +141,8 @@ class Articulos(models.Model):
                                  verbose_name='Proveedor principal')  # Field name made lowercase.
     descstock = Bit1BooleanField(db_column='DescStock', verbose_name='Descuenta Stock', default=True)  # Field name made lowercase. This field type is a guess.
     tipoiva = models.ForeignKey('Tipoiva', models.DO_NOTHING, db_column='TipoIva', default='01')  # Field name made lowercase.
-    idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca', default=1)  # Field name made lowercase.
-    preciopub = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca', default=1, verbose_name='Marca')  # Field name made lowercase.
+    preciopub = models.DecimalField(max_digits=12, decimal_places=2, default=0, verbose_name='Precio publico')
     disponible_web = Bit1BooleanField(default=True, verbose_name = "Disponible venta web")
     ult_act = models.DateField(default=datetime.now())
     etiqueta = models.CharField(max_length=200, blank=True)
