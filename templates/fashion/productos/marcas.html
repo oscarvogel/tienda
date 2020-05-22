@@ -1,7 +1,14 @@
-<div class="bc-item">
-    <label for="{{m.nombre}}">
-        {{m.nombre|title}}
-        <input type="checkbox" id="{{m.idgrupo}}">
-        <span class="checkmark"></span>
-    </label>
-</div>
+<form action="{%url 'productos:lista_productos' %}" method="post">
+{%for m in marcas%}
+    <div class="bc-item">
+        <label for="{{m.nombre}}">
+            {{m.nombre|title}}
+            <input type="checkbox" id="{{m.idgrupo}}">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+{%endfor%}
+<!--    <div class="bc-item">-->
+<!--        {{form.marcas}}-->
+<!--    </div>-->
+</form>

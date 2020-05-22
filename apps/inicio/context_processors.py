@@ -13,7 +13,7 @@ def paramsist_processors(request):
         whatsapp_link
     )
     categorias = Grupos.objects.filter(habilita_web = True)
-    marcas = Marcas.objects.filter(habilita_web = True)
+    marcas = Marcas.objects.filter(habilita_web = True).order_by('nombre')
     return {
         'fb_url': fb_url,
         'logo': logo,

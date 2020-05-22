@@ -37,10 +37,11 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
-                    <form action=""method="post">
+                    <form action="{%url 'productos:lista_productos' %}" method="post">
                         {% csrf_token %}
                         <div class="advanced-search">
-                            <button type="button" class="category-btn">Categorias</button>
+<!--                            <button type="button" class="category-btn">Categorias</button>-->
+                            {{form_categoria.categoria}}
                             <div class="input-group">
                                 {{form.search_field}}
                                 <button type="submit"><i class="ti-search"></i></button>

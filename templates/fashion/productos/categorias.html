@@ -1,4 +1,4 @@
 {%load static%}
 {%for c in categorias%}
-    <li><a href="">{{c.nombre|title}}</a> </li>
+    <li><a href="{%url 'productos:lista_producto_categoria' categoria_id=c.idgrupo %}">{{c.nombre|title}}</a> </li>
 {%endfor%}
