@@ -1,11 +1,13 @@
 {% load static %}
 {% load static %}
 {% load mathfilters %}
-<div class="container">
-    <h4>Tu historial</h4>
-    <div class="product-slider owl-carousel">
-        {%for b in historial%}
-        {%include 'fashion/productos/detalle_articulo.html' %}
-        {%endfor%}
+{%if historial%}
+    <div class="container">
+        <h4>Tu historial</h4>
+        <div class="product-slider owl-carousel">
+            {%for b in historial%}
+            {%include 'fashion/productos/detalle_articulo.html' %}
+            {%endfor%}
+        </div>
     </div>
-</div>
+{%endif%}

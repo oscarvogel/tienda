@@ -151,3 +151,11 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
+
+EMAIL_HOST = 'mail.soepm.com.ar'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "sistemas@soepm.com.ar"
+EMAIL_HOST_PASSWORD = "bWyFqn/5vI"
+EMAIL_USE_TLS = False
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

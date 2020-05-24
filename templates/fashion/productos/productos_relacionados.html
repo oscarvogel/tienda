@@ -1,0 +1,21 @@
+{% load static %}
+{%if relacionados%}
+    <div class="related-products spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Productos relacionados</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {%for b in relacionados%}
+                <div class="col-lg-3 col-sm-6">
+                    {%include 'fashion/productos/detalle_articulo_lista.html' with b=b %}
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+{%endif%}

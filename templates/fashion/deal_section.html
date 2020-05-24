@@ -2,7 +2,6 @@
 <script>
 function makeTimer() {
    var endTime=new Date({{ ofertas.finaliza|date:"U" }} * 1000);
-   console.log("entra" + endTime);
     endTime = (Date.parse(endTime) / 1000);
 
         var now = new Date();

@@ -48,8 +48,10 @@ def get_producto(request, producto=1):
         historial.usuario = request.user
         historial.articulo = articulo
         historial.save()
+    relacionados = Articulos.objects.filter(idgrupo = articulo.idgrupo)[:4]
 
     template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "productos", "producto_invididual.html")
     return render(request, template_name=template, context={
-        'articulo': articulo
+        'articulo': articulo,
+        'relacionados': relacionados,
     })
