@@ -161,9 +161,11 @@ class Articulos(models.Model):
 
     #devuelve la url de la imagen principal
     def get_principal_image(self):
+        url = ''
         try:
             imagen = ImagenArticulo.objects.get(producto=self.idarticulo, principal=True)
-            url = imagen.imagen.url
+            if imagen.imagen:
+                url = imagen.imagen.url
         except:
             url = ''
 

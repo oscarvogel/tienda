@@ -22,8 +22,10 @@
                             <div class="product-thumbs">
                                 <div class="product-thumbs-track ps-slider owl-carousel">
                                     {%for img in articulo.imagenarticulo_set.all%}
-                                    <div class="pt active" data-imgbigurl="{{img.imagen.url}}"><img
-                                            src="{{img.imagen.url}}" alt=""></div>
+                                        {%if img.imagen%}
+                                            <div class="pt active" data-imgbigurl="{{img.imagen.url}}"><img
+                                                    src="{{img.imagen.url}}" alt=""></div>
+                                        {%endif%}
                                     {%endfor%}
                                 </div>
                             </div>
