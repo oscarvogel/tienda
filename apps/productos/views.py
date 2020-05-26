@@ -2,10 +2,13 @@ from os.path import join
 
 from django.shortcuts import render
 
+from rest_framework import viewsets
 # Create your views here.
+from apps.cart.forms import CartAddProductForm
 from apps.inicio.forms import SearchForm, CategoriasForm
 from apps.inicio.models import Paramsist
-from apps.productos.models import Articulos, Historial
+from apps.productos.models import Articulos, Historial, Favoritos
+from apps.productos.serializers import FavoritosSerializer
 
 
 def lista_productos(request, categoria_id=0):
@@ -42,6 +45,8 @@ def lista_productos(request, categoria_id=0):
 
 def get_producto(request, producto=1):
 
+    cart_product_form = CartAddProductForm()
+
     articulo = Articulos.objects.get(idarticulo=producto)
     if request.user.is_authenticated:
         historial = Historial()
@@ -55,4 +60,9 @@ def get_producto(request, producto=1):
     return render(request, template_name=template, context={
         'articulo': articulo,
         'relacionados': relacionados,
+        'cart_product_form': cart_product_form,
     })
+
+class FavoritosViewSet(viewsets.ModelViewSet):
+    queryset = Favoritos.objects.all()
+    serializer_class = FavoritosSerializer

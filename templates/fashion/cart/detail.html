@@ -1,0 +1,99 @@
+{% extends "fashion/index.html" %}
+{%load static%}
+{%block content%}
+<!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="{%url 'inicio:inicio' %}}"><i class="fa fa-home"></i> Inicio</a>
+                        <a href="{%url 'productos:lista_productos' %}">Comprar</a>
+                        <span>Carrito Compra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+<!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th class="p-name">Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart %}
+                                    {% with product=item.product %}
+                                        <tr>
+                                            <td class="cart-pic first-row"><img src="{{product.get_principal_image}}" alt=""></td>
+                                            <td class="cart-title first-row">
+                                                <h5>{{product.nombre}}</h5>
+                                            </td>
+                                            <td class="p-price first-row">${{item.price}}</td>
+                                            <form action="{% url 'cart:cart_add' product.idarticulo %}" method="post">
+                                                <td class="qua-col first-row">
+                                                    <div class="quantity">
+                                                        <div class="pro-qty">
+                                                            {{ item.update_quantity_form.quantity }}
+                                                            {{ item.update_quantity_form.update }}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="total-price first-row">${{item.total_price}}</td>
+                                                {% csrf_token %}
+                                                <td class="close-td first-row">
+                                                    <button type="submit" class="btn ti-reload"></button></td>
+                                            </form>
+                                            <td class="close-td first-row"><a class="btn" href="{%url 'cart:cart_remove' product.idarticulo %}">
+                                                <i class="ti-close"></i>
+                                            </a></td>
+                                        </tr>
+                                    {% endwith %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="cart-buttons">
+                                <a href="{% url 'inicio:inicio' %}" class="primary-btn continue-shop">Seguir Comprando</a>
+<!--                                <a href="#" class="primary-btn up-cart">Actualizar</a>-->
+                            </div>
+                            <div class="discount-coupon">
+                                <h6>Codigo descuento</h6>
+                                <form action="#" class="coupon-form">
+                                    <input type="text" placeholder="Ingresa tu codigo">
+                                    <button type="submit" class="site-btn coupon-btn">Aplicar</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 offset-lg-4">
+                            <div class="proceed-checkout">
+                                <ul>
+                                    <li class="subtotal">Subtotal <span>${{ cart.get_total_price }}</span></li>
+                                    <li class="cart-total">Total <span>${{ cart.get_total_price }}</span></li>
+                                </ul>
+                                <a href="#" class="proceed-btn">FINALIZA TU COMPRA</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+{%endblock%}

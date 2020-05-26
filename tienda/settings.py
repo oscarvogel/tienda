@@ -48,10 +48,12 @@ INSTALLED_APPS = [
     'mathfilters',
     'django_admin_listfilter_dropdown',
     'tinymce',
+    'rest_framework',
     'apps.inicio',
     'apps.productos',
     'apps.usuarios',
     'apps.blog',
+    'apps.cart',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'apps.inicio.context_processors.paramsist_processors',
+                'apps.cart.context_processors.cart',
             ],
         },
     },
@@ -159,3 +162,8 @@ EMAIL_HOST_PASSWORD = "bWyFqn/5vI"
 EMAIL_USE_TLS = False
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+CART_SESSION_ID = 'luly_shop'
