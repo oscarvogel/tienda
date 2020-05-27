@@ -16,8 +16,10 @@ def paramsist_processors(request):
     )
     categorias = Grupos.objects.filter(habilita_web = True)
     marcas = Marcas.objects.filter(habilita_web = True).order_by('nombre')
-
-    favoritos_usuario = User.objects.get(username=request.user).fav_user.count()
+    try:
+        favoritos_usuario = User.objects.get(username=request.user).fav_user.count()
+    except:
+        favoritos_usuario = 0
 
     return {
         'fb_url': fb_url,
