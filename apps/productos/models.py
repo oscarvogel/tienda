@@ -146,7 +146,7 @@ class Articulos(models.Model):
     disponible_web = Bit1BooleanField(default=True, verbose_name = "Disponible venta web")
     ult_act = models.DateField(default=datetime.now())
     etiqueta = models.CharField(max_length=200, blank=True)
-    favoritos = models.ManyToManyField(User)
+    favoritos = models.ManyToManyField(User, related_name='fav_user')
 
     class Meta:
         managed = False

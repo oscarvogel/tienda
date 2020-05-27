@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+
 from apps.inicio.models import Paramsist
 from apps.productos.models import Grupos, Marcas
 
@@ -14,6 +16,9 @@ def paramsist_processors(request):
     )
     categorias = Grupos.objects.filter(habilita_web = True)
     marcas = Marcas.objects.filter(habilita_web = True).order_by('nombre')
+
+    favoritos_usuario = User.objects.get(username=request.user).fav_user.count()
+
     return {
         'fb_url': fb_url,
         'logo': logo,
@@ -23,5 +28,6 @@ def paramsist_processors(request):
         'ig_url': ig_url,
         'url_consulta_wsp': url_consulta_wsp,
         'categorias': categorias,
-        'marcas': marcas
+        'marcas': marcas,
+        'favoritos_usuario': favoritos_usuario,
     }
