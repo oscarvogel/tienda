@@ -8,7 +8,15 @@
         {%endif%}
         <div class="sale"></div>
         <div class="icon">
-            <i class="icon_heart_alt"></i>
+            <h2>favorito {{b.articulo.favoritos.all}}</h2>
+            {%with user_fav=b.articulo.favoritos.all %}
+                <h2>{{user_fav}}</h2>
+                {% if request.user not in user_fav %}
+                    <i class="far fa-heart"></i>
+                {% else %}
+                    <i class="fas fa-heart"></i>
+                {% endif %}
+            {%endwith%}
         </div>
         <ul>
             <li class="w-icon active"><a href="{{b.articulo.get_absolute_url}}"><i class="icon_bag_alt"></i></a></li>

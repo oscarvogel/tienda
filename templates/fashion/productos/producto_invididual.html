@@ -35,7 +35,16 @@
                                 <div class="pd-title">
                                     <span>{{articulo.idgrupo.nombre}}</span>
                                     <h3>{{articulo.nombre}}</h3>
-                                    <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+                                    {%with user_fav=articulo.favoritos.all %}
+                                        <a href="#" class="heart-icon like"  data-id="{{ articulo.idarticulo }}"
+                                           data-action="{% if request.user in user_fav %}un{% endif %}like">
+                                            {% if request.user not in user_fav %}
+                                                <i class="fa fa-heart-o like" aria-hidden="true"></i>
+                                            {% else %}
+                                                <i class="fa fa-heart like" aria-hidden="true"></i>
+                                            {% endif %}
+                                    </a>
+                                    {%endwith%}
                                 </div>
                                 <div class="pd-rating">
                                     <i class="fa fa-star"></i>
@@ -106,3 +115,29 @@
     <!-- Related Products Section End -->
 
 {%endblock%}
+{% block domready %}
+$('a.like').click(function(e){
+    e.preventDefault();
+    $.post('{% url "productos:favorito_articulo" %}',
+        {
+        idarticulo: $(this).data('id'),
+        action: $(this).data('action')
+        },
+        function(data){
+            if (data['status'] == 'ok'){
+                var previous_action = $('a.like').data('action');
+                var i_like = $('i.like');
+                if (previous_action == 'like'){
+                    i_like.removeClass('fa fa-heart like');
+                    i_like.addClass('fa fa-heart-o like');
+                }else{
+                    i_like.removeClass('fa fa-heart-o like');
+                    i_like.addClass('fa fa-heart like');
+                }
+                $('a.like').data('action', previous_action == 'like' ? 'unlike' : 'like');
+
+            }
+        }
+    );
+});
+{% endblock %}

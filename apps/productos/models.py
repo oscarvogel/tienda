@@ -146,6 +146,7 @@ class Articulos(models.Model):
     disponible_web = Bit1BooleanField(default=True, verbose_name = "Disponible venta web")
     ult_act = models.DateField(default=datetime.now())
     etiqueta = models.CharField(max_length=200, blank=True)
+    favoritos = models.ManyToManyField(User)
 
     class Meta:
         managed = False
@@ -242,12 +243,3 @@ class Historial(models.Model):
     class Meta:
         verbose_name = 'Historial'
         verbose_name_plural = 'Historial'
-
-class Favoritos(models.Model):
-    fecha = models.DateTimeField(default=datetime.now())
-    articulo = models.ForeignKey(Articulos, models.DO_NOTHING)
-    usuario = models.ForeignKey(User, models.DO_NOTHING)
-
-    class Meta:
-        verbose_name = 'Favoritos'
-        verbose_name_plural = 'Favoritos'

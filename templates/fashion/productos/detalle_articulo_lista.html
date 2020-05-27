@@ -8,11 +8,17 @@
         {%endif%}
         <div class="sale"></div>
         <div class="icon">
-            <i class="icon_heart_alt"></i>
+            {%with user_fav=b.favoritos.all %}
+                {% if request.user not in user_fav %}
+                    <i class="far fa-heart"></i>
+                {% else %}
+                    <i class="fas fa-heart"></i>
+                {% endif %}
+            {%endwith%}
         </div>
         <ul>
             <li class="w-icon active"><a href="{{b.get_absolute_url}}"><i class="icon_bag_alt"></i></a></li>
-            <li class="quick-view"><a href="{{b.get_absolute_url}}">Vista Rapida</a></li>
+            <li class="quick-view"><a href="{{b.get_absolute_url}}">Ver</a></li>
             <li class="w-icon"><a href="{{b.get_absolute_url}}"><i class="fa fa-random"></i></a></li>
         </ul>
     </div>

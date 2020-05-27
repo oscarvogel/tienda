@@ -3,12 +3,15 @@ from os.path import join
 from django.shortcuts import render
 
 from rest_framework import viewsets
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 from apps.cart.forms import CartAddProductForm
 from apps.inicio.forms import SearchForm, CategoriasForm
 from apps.inicio.models import Paramsist
-from apps.productos.models import Articulos, Historial, Favoritos
-from apps.productos.serializers import FavoritosSerializer
+from apps.productos.models import Articulos, Historial
 
 
 def lista_productos(request, categoria_id=0):
@@ -63,6 +66,19 @@ def get_producto(request, producto=1):
         'cart_product_form': cart_product_form,
     })
 
-class FavoritosViewSet(viewsets.ModelViewSet):
-    queryset = Favoritos.objects.all()
-    serializer_class = FavoritosSerializer
+@login_required(login_url='usuarios:login')
+@require_POST
+def favorito_articulo(request):
+    articulo_id = request.POST.get('idarticulo')
+    action = request.POST.get('action')
+    if articulo_id and action:
+        try:
+            articulo = Articulos.objects.get(idarticulo=articulo_id)
+            if action == 'like':
+                articulo.favoritos.add(request.user)
+            else:
+                articulo.favoritos.remove(request.user)
+            return JsonResponse({'status': 'ok'})
+        except:
+            pass
+    return JsonResponse({'status': 'ko'})
