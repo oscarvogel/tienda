@@ -52,7 +52,7 @@ class ArticulosAdmin(admin.ModelAdmin):
         'disponible_web'
     )
     inlines = [StockAdminInline, ImagenProductoInLine]
-    exclude = ['nombreticket', 'peso', 'tipoiva', 'descstock', 'ult_act']
+    exclude = ['nombreticket', 'peso', 'tipoiva', 'descstock', 'ult_act', 'favoritos']
 
 admin.site.register(Grupos, GrupoAdmin)
 admin.site.register(Articulos, ArticulosAdmin)
