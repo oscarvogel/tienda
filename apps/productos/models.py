@@ -184,7 +184,7 @@ class Stock(models.Model):
     idstock = models.AutoField(db_column='idStock', primary_key=True)  # Field name made lowercase.
     idarticulo = models.ForeignKey('Articulos', models.DO_NOTHING, db_column='idArticulo')  # Field name made lowercase.
     # idmarca = models.ForeignKey('Marcas', models.DO_NOTHING, db_column='idMarca', default=1, verbose_name='Marca')  # Field name made lowercase.
-    idtalle = models.ForeignKey('Talles', models.DO_NOTHING, db_column='idTalle', verbose_name='Talle')  # Field name made lowercase.
+    idtalle = models.ForeignKey('Talles', models.DO_NOTHING, db_column='idTalle', verbose_name='Talle', related_name='talle')  # Field name made lowercase.
     idcolorp = models.ForeignKey('Color', models.DO_NOTHING, db_column='idColorP', default=1, related_name='colorp')  # Field name made lowercase.
     idcolor = models.ForeignKey('Color', models.DO_NOTHING,db_column='idColorS', related_name='colors')  # Field name made lowercase.
     # costo = models.DecimalField(db_column='Costo', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.

@@ -1,0 +1,80 @@
+{%extends 'fashion/index.html' %}
+{%load static%}
+{% block title %}
+ Revisar
+{% endblock %}
+{%block content%}
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text product-more">
+                        <a href="{%url 'inicio:inicio' %}"><i class="fa fa-home"></i> Inicio</a>
+                        <a href="{%url 'productos:lista_productos' %}">Comprar</a>
+                        <span>Revisar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="checkout-section spad">
+        <div class="container">
+            <form action="#" class="checkout-form">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkout-content">
+                            {%if user.is_authenticated%}
+                                <a href="#" class="content-btn">Revisa tu cuenta</a>
+                            {%else%}
+                                <a href="{%url 'usuarios:login' %}}" class="content-btn">Ingresa con tu cuenta</a>
+                            {%endif%}
+                        </div>
+                        <h4>Detalle de Facturacion</h4>
+                        <div class="row">
+                            {%for field in form%}
+                                <div class="col-lg-12">
+                                    <label for="{{field.id_for_label}}">{{field.label}}<span>*</span></label>
+                                    {{field.errors }}
+                                    {{field}}
+                                </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="checkout-content">
+                            <input type="text" placeholder="Enter Your Coupon Code">
+                        </div>
+                        <div class="place-order">
+                            <h4>Su orden</h4>
+                            <div class="order-total">
+                                <ul class="order-table">
+                                    <li>Producto <span>Total</span></li>
+                                    {%for item in cart%}
+                                        <a href="{{item.product.get_absolute_url}}">
+                                            <li class="fw-normal">{{item.product.nombre}}x{{item.quantity}} <span>${{item.price}}</span></li>
+                                        </a>
+                                    {%endfor%}
+                                    <li class="fw-normal">Subtotal <span>${{cart.get_total_price}}</span></li>
+                                    <li class="total-price">Total <span>{{cart.get_total_price}}</span></li>
+                                </ul>
+                                <div class="payment-check">
+                                </div>
+                                <div class="order-btn">
+                                    <button type="submit" class="site-btn place-btn">Realizar Pedido</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+{%endblock%}

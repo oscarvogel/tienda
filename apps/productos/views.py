@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from apps.cart.forms import CartAddProductForm
 from apps.inicio.forms import SearchForm, CategoriasForm
 from apps.inicio.models import Paramsist
-from apps.productos.models import Articulos, Historial
+from apps.productos.models import Articulos, Historial, Color, Talles
 
 
 def lista_productos(request, categoria_id=0):
@@ -46,10 +46,12 @@ def lista_productos(request, categoria_id=0):
         'form_categoria': form_categoria,
     })
 
+@login_required(login_url='usuarios:login')
 def get_producto(request, producto=1):
 
     cart_product_form = CartAddProductForm()
-
+    colores = Color.objects.filter(colorp__idarticulo = producto).distinct()
+    talles = Talles.objects.filter(talle__idarticulo = producto).distinct()
     articulo = Articulos.objects.get(idarticulo=producto)
     if request.user.is_authenticated:
         historial = Historial()
@@ -64,6 +66,8 @@ def get_producto(request, producto=1):
         'articulo': articulo,
         'relacionados': relacionados,
         'cart_product_form': cart_product_form,
+        'colores': colores,
+        'talles': talles,
     })
 
 @login_required(login_url='usuarios:login')

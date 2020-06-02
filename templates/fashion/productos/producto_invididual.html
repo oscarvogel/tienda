@@ -61,25 +61,28 @@
                                 <div class="pd-color">
                                     <h6>Color</h6>
                                     <div class="pd-color-choose">
-                                        {%for img in articulo.stock_set.all%}
-                                            <div class="cc-item">
-                                                <input type="radio" id="cc-black">
-                                                <label for="cc-black"></label>
+                                        {%for c in colores%}
+                                            <div class="cc-item" style="background-color:black;">
+                                                <input type="radio" id="{{c.idcolor}}">
+                                                <label for="{{c.idcolor}}" style="background-color:{{c.color_web}};"></label>
                                             </div>
                                         {%endfor%}
                                     </div>
                                 </div>
                                 <div class="pd-size-choose">
-                                    {%for img in articulo.stock_set.all%}
+                                    <h6>Talle</h6>
+                                    {%for t in talles%}
                                         <div class="sc-item">
-                                            <input type="radio" id="sm-size">
-                                            <label for="sm-size">s</label>
+                                            <input type="radio" id="{{t.idtalle}}" data-id="{{t.idtalle}}">
+                                            <label for="{{t.idtalle}}">{{t}}</label>
                                         </div>
                                     {%endfor%}
                                 </div>
                                 <div class="quantity">
                                     <form action="{% url 'cart:cart_add' articulo.idarticulo %}" method="post">
                                         {% csrf_token %}
+                                        {{cart_product_form.size}}
+                                        {{cart_product_form.color}}
                                         <div class="pro-qty">
 <!--                                            <input type="text" value="1">-->
                                             {{cart_product_form.quantity}}

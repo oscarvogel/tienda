@@ -86,7 +86,7 @@
                                     <li class="subtotal">Subtotal <span>${{ cart.get_total_price }}</span></li>
                                     <li class="cart-total">Total <span>${{ cart.get_total_price }}</span></li>
                                 </ul>
-                                <a href="#" class="proceed-btn">FINALIZA TU COMPRA</a>
+                                <a href="{% url 'orders:order_create' %}" class="proceed-btn">FINALIZA TU COMPRA</a>
                             </div>
                         </div>
                     </div>

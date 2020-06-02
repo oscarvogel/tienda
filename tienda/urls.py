@@ -26,6 +26,7 @@ urlpatterns = [
     path('productos/', include('apps.productos.urls', namespace='productos')),
     path('usuarios/', include('apps.usuarios.urls', namespace='usuarios')),
     path('cart/', include('apps.cart.urls', namespace='cart')),
+    path('orders/', include('apps.orders.urls', namespace='orders')),
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
