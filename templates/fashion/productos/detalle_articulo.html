@@ -8,7 +8,7 @@
         {%endif%}
         <div class="sale"></div>
         <div class="icon">
-            <h2>favorito {{b.articulo.favoritos.all}}</h2>
+            <h2></h2>
             {%with user_fav=b.articulo.favoritos.all %}
                 <h2>{{user_fav}}</h2>
                 {% if request.user not in user_fav %}
@@ -20,7 +20,7 @@
         </div>
         <ul>
             <li class="w-icon active"><a href="{{b.articulo.get_absolute_url}}"><i class="icon_bag_alt"></i></a></li>
-            <li class="quick-view"><a href="{{b.articulo.get_absolute_url}}">Vista Rapida</a></li>
+            <li class="quick-view"><a href="{{b.articulo.get_absolute_url}}">Ver</a></li>
             <li class="w-icon"><a href="{{b.articulo.get_absolute_url}}"><i class="fa fa-random"></i></a></li>
         </ul>
     </div>
