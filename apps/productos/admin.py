@@ -21,10 +21,11 @@ class ColoresAdmin(admin.ModelAdmin):
     exclude = ['color']
 
 class GrupoAdmin(admin.ModelAdmin):
-    search_fields = ['nombre']
+    search_fields = ['nombre', 'idgrupo']
     list_per_page = 20
     list_display = ['idgrupo', 'nombre', 'habilita_web']
     list_editable = ['nombre', 'habilita_web']
+    list_filter = ('habilita_web',)
 
 class StockAdminInline(admin.TabularInline):
     model = Stock

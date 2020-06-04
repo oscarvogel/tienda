@@ -30,13 +30,10 @@
             <h5>{{b.articulo.nombre}}</h5>
         </a>
         <div class="product-price">
-            {%if user.is_authenticated%}
-                {{b.articulo.preciopub}}
-                <span>${{b.articulo.get_price_increment}}</span>
-            {%else%}
+            {{b.articulo.preciopub}}
+            <span>${{b.articulo.get_price_increment}}</span>
                 <a href="{{url_consulta_wsp}} {{b.articulo.nombre}}" class="btn btn-success">
-                    Precio <i class="fa fa-whatsapp my-float"></i></a>
-            {%endif%}
+                    Mas info... <i class="fa fa-whatsapp my-float"></i></a>
         </div>
     </div>
 </div>

@@ -1,5 +1,7 @@
 from os.path import join
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 from django.shortcuts import render
 
 from rest_framework import viewsets
@@ -20,6 +22,8 @@ def lista_productos(request, categoria_id=0):
     form_categoria = CategoriasForm()
     articulos = None
     historial = None
+    articulos_list = None
+    page = request.GET.get('page', 1)
 
     if request.method == 'POST':
         form_busqueda = SearchForm(request.POST)
@@ -28,13 +32,23 @@ def lista_productos(request, categoria_id=0):
             cd = form_busqueda.cleaned_data
             cd_cat = form_categoria.cleaned_data
             print(cd_cat['categoria'])
-            articulos = Articulos.objects.filter(nombre__icontains = cd['search_field'],
-                                                 disponible_web = True,
-                                                 idgrupo = cd_cat['categoria'])
+            articulos_list = Articulos.objects.filter(Q(nombre__icontains = cd['search_field']) |
+                                                 Q(etiqueta__icontains = cd['search_field']))
+            articulos_list = articulos_list.filter(disponible_web = True)
+
             # print(articulos.query)
             template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "productos", "lista_productos.html")
     else:
-        articulos = Articulos.objects.filter(idgrupo = categoria_id)
+        articulos_list = Articulos.objects.filter(idgrupo = categoria_id)
+
+    if articulos_list:
+        paginator = Paginator(articulos_list, 10)
+        try:
+            articulos = paginator.page(page)
+        except PageNotAnInteger:
+            articulos = paginator.page(1)
+        except EmptyPage:
+            articulos = paginator.page(paginator.num_pages)
 
     if request.user.is_authenticated:
         historial = Historial.objects.filter(usuario = request.user).order_by('-fecha')[:10]
