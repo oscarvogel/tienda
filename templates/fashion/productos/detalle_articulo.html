@@ -1,41 +1,39 @@
 {% load static %}
 <div class="product-item">
-    <div class="pi-pic">
-        {%if b.imagen%}
-            <img src="{{b.imagen.url}}" alt="">
-        {%elif b.articulo.get_principal_image%}
-            <img src="{{b.articulo.get_principal_image}}" alt="{{b.articulo.nombre}}">
-        {%else%}
-            <img src="{%get_media_prefix%}articulos/noimage.jpg" alt="{{b.articulo.nombre}}">
-        {%endif%}
-        <div class="sale"></div>
-        <div class="icon">
-            <h2></h2>
-            {%with user_fav=b.articulo.favoritos.all %}
+    <a href="{{b.articulo.get_absolute_url}}">
+        <div class="pi-pic">
+            {%if b.imagen%}
+                <img src="{{b.imagen.url}}" alt="">
+            {%elif b.articulo.get_principal_image%}
+                <img src="{{b.articulo.get_principal_image}}" alt="{{b.articulo.nombre}}">
+            {%else%}
+                <img src="{%get_media_prefix%}articulos/noimage.jpg" alt="{{b.articulo.nombre}}">
+            {%endif%}
+            <div class="sale"></div>
+            <div class="icon">
                 <h2></h2>
-                {% if request.user not in user_fav %}
-                    <i class="far fa-heart"></i>
-                {% else %}
-                    <i class="fas fa-heart"></i>
-                {% endif %}
-            {%endwith%}
+                {%with user_fav=b.articulo.favoritos.all %}
+                    <h2></h2>
+                    {% if request.user not in user_fav %}
+                        <i class="far fa-heart"></i>
+                    {% else %}
+                        <i class="fas fa-heart"></i>
+                    {% endif %}
+                {%endwith%}
+            </div>
+            <ul>
+                <li class="quick-view"><a href="{{b.articulo.get_absolute_url}}">Ver Producto</a></li>
+            </ul>
         </div>
-        <ul>
-            <li class="w-icon active"><a href="{{b.articulo.get_absolute_url}}"><i class="icon_bag_alt"></i></a></li>
-            <li class="quick-view"><a href="{{b.articulo.get_absolute_url}}">Ver</a></li>
-            <li class="w-icon"><a href="{{b.articulo.get_absolute_url}}"><i class="fa fa-random"></i></a></li>
-        </ul>
-    </div>
-    <div class="pi-text">
-        <div class="catagory-name">{{b.articulo.idgrupo.nombre}}</div>
-        <a href="{{b.articulo.get_absolute_url}}">
+        <div class="pi-text">
+            <div class="catagory-name">{{b.articulo.idgrupo.nombre}}</div>
             <h5>{{b.articulo.nombre}}</h5>
-        </a>
-        <div class="product-price">
-            {{b.articulo.preciopub}}
-            <span>${{b.articulo.get_price_increment}}</span>
-                <a href="{{url_consulta_wsp}} {{b.articulo.nombre}}" class="btn btn-success">
-                    Mas info... <i class="fa fa-whatsapp my-float"></i></a>
+            <div class="product-price">
+                {{b.articulo.preciopub}}
+                <span>${{b.articulo.get_price_increment}}</span>
+                    <a href="{{url_consulta_wsp}} {{b.articulo.nombre}}" class="btn btn-success">
+                        Mas info... <i class="fa fa-whatsapp my-float"></i></a>
+            </div>
         </div>
-    </div>
+    </a>
 </div>
