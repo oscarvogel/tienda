@@ -3,8 +3,10 @@
     <div class="pi-pic">
         {%if b.imagen%}
             <img src="{{b.imagen.url}}" alt="">
+        {%elif b.articulo.get_principal_image%}
+            <img src="{{b.articulo.get_principal_image}}" alt="{{b.articulo.nombre}}">
         {%else%}
-            <img src="{{b.get_principal_image}}" alt="{{b.nombre}}">
+            <img src="{%get_media_prefix%}articulos/noimage.jpg" alt="{{b.articulo.nombre}}">
         {%endif%}
         <div class="sale"></div>
         <div class="icon">

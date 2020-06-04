@@ -16,7 +16,7 @@ from apps.inicio.models import Paramsist
 from apps.productos.models import Articulos, Historial, Color, Talles
 
 
-def lista_productos(request, categoria_id=0):
+def lista_productos(request, categoria_id=0, talle_id=0, marca_id=0):
     template = join(Paramsist.ObtenerValor("CARPETA_TEMA"),"productos", "lista_productos.html")
     form_busqueda = SearchForm()
     form_categoria = CategoriasForm()
