@@ -38,11 +38,13 @@ def lista_productos(request, categoria_id=0, talle_id=0, marca_id=0):
 
             # print(articulos.query)
             template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "productos", "lista_productos.html")
+    elif categoria_id:
+        articulos_list = Articulos.objects.filter(idgrupo = categoria_id, disponible_web = True)
     else:
-        articulos_list = Articulos.objects.filter(idgrupo = categoria_id)
+        articulos_list = Articulos.objects.filter(disponible_web = True)
 
     if articulos_list:
-        paginator = Paginator(articulos_list, 10)
+        paginator = Paginator(articulos_list, 18)
         try:
             articulos = paginator.page(page)
         except PageNotAnInteger:
