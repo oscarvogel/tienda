@@ -28,13 +28,13 @@ class GrupoAdmin(admin.ModelAdmin):
 
 class StockAdminInline(admin.TabularInline):
     model = Stock
-    fields = ['idtalle', 'idcolor', 'stock', ]
+    fields = ['idtalle', 'idcolor', 'stock', 'preciopub']
 
 class StockAdmin(admin.ModelAdmin):
-    list_display = ['idarticulo', 'idcolor', 'idtalle', 'stock']
+    list_display = ['idarticulo', 'idcolor', 'idtalle', 'stock', 'preciopub']
     list_per_page = 20
-    search_fields = ['idarticulo__nombre']
-    list_editable = ['stock']
+    search_fields = ['idarticulo__nombre', 'idarticulo__etiqueta']
+    list_editable = ['stock', 'preciopub']
 
 class ImagenProductoInLine(admin.StackedInline):
     model = ImagenArticulo
@@ -43,7 +43,7 @@ class ImagenProductoInLine(admin.StackedInline):
 
 class ArticulosAdmin(admin.ModelAdmin):
     list_per_page = 20
-    search_fields = ('nombre','idgrupo__nombre')
+    search_fields = ('nombre', 'idgrupo__nombre', 'etiqueta')
     list_display = ('idarticulo','nombre','preciopub', 'disponible_web', 'etiqueta')
     list_editable = ('nombre', 'preciopub','disponible_web', 'etiqueta')
     list_filter = (

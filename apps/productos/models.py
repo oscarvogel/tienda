@@ -147,6 +147,7 @@ class Articulos(models.Model):
     ult_act = models.DateField(default=datetime.now())
     etiqueta = models.CharField(max_length=200, blank=True)
     favoritos = models.ManyToManyField(User, related_name='fav_user', blank=True)
+    codigo_barra = models.CharField(max_length=20, default='', blank=True)
 
     class Meta:
         managed = False
@@ -188,7 +189,7 @@ class Stock(models.Model):
     idcolorp = models.ForeignKey('Color', models.DO_NOTHING, db_column='idColorP', default=1, related_name='colorp')  # Field name made lowercase.
     idcolor = models.ForeignKey('Color', models.DO_NOTHING,db_column='idColorS', related_name='colors')  # Field name made lowercase.
     # costo = models.DecimalField(db_column='Costo', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
-    stock = models.DecimalField(db_column='Stock', max_digits=12, decimal_places=4, default=0)  # Field name made lowercase.
+    stock = models.IntegerField(db_column='Stock', default=0)  # Field name made lowercase.
     # stockminimo = models.DecimalField(db_column='StockMinimo', max_digits=12, decimal_places=4, default=0)  # Field name made lowercase.
     # incre1 = models.DecimalField(db_column='Incre1', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
     # precio1 = models.DecimalField(db_column='Precio1', max_digits=12, decimal_places=2, default=0)  # Field name made lowercase.
