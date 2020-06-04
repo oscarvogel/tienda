@@ -58,7 +58,9 @@ setInterval(function() { makeTimer(); }, 1000);
                     <p>Seg</p>
                 </div>
             </div>
-            <a href="#" class="primary-btn">Compralo ahora</a>
+            {%for a in ofertas.detallesecciones_set.all%}
+                <a href="{{a.get_absolute_url%}" class="primary-btn">Compralo ahora</a>
+            {%endfor%}
         </div>
     </div>
 </section>
