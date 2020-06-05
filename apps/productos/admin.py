@@ -29,7 +29,7 @@ class GrupoAdmin(admin.ModelAdmin):
 
 class StockAdminInline(admin.TabularInline):
     model = Stock
-    fields = ['idtalle', 'idcolor', 'stock', 'preciopub']
+    fields = ['idtalle', 'idcolor', 'stock', 'preciopub', 'codbarraart']
 
 class StockAdmin(admin.ModelAdmin):
     list_display = ['idarticulo', 'idcolor', 'idtalle', 'stock', 'preciopub']
