@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'django_admin_listfilter_dropdown',
     'tinymce',
+    'ckeditor',
     'rest_framework',
     'apps.inicio',
     'apps.productos',
@@ -168,3 +169,5 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 CART_SESSION_ID = 'luly_shop'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
