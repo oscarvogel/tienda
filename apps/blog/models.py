@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 from django.utils.safestring import mark_safe
 from tinymce.models import HTMLField
-
+from ckeditor.fields import RichTextField
 
 class Blog(models.Model):
 
@@ -40,7 +40,7 @@ class Blog(models.Model):
 class BlogDetail(models.Model):
 
     blog = models.ForeignKey(Blog, models.DO_NOTHING)
-    content = HTMLField(verbose_name='Contenido')
+    content = RichTextField(verbose_name='Contenido')
 
     class Meta:
         verbose_name = 'Detalle Blog'
