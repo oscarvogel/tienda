@@ -170,4 +170,4 @@ REST_FRAMEWORK = {
 }
 CART_SESSION_ID = 'luly_shop'
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = MEDIA_URL + "uploads/"
