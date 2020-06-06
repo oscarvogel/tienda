@@ -54,19 +54,19 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
+            user = form.save()
+            user.is_active = True
             user.save()
-            current_site = get_current_site(request)
-            subject = 'Activa tu cuenta de Luly Shop'
-            message = render_to_string('fashion/usuarios/account_activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            user.email_user(subject, message)
-            return redirect('usuarios:account_activation_sent')
+            # current_site = get_current_site(request)
+            # subject = 'Activa tu cuenta de Luly Shop'
+            # message = render_to_string('fashion/usuarios/account_activation_email.html', {
+            #     'user': user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            #     'token': account_activation_token.make_token(user),
+            # })
+            # user.email_user(subject, message)
+            return redirect('/')
         else:
             print(form.errors)
     else:
