@@ -3,9 +3,15 @@ from django.contrib import admin
 # Register your models here.
 from django_admin_listfilter_dropdown.filters import RelatedDropdownFilter
 
-from apps.productos.models import Articulos, Stock, Grupos, ImagenArticulo, Color, Marcas
+from apps.productos.models import Articulos, Stock, Grupos, ImagenArticulo, Color, Marcas, Talles
 
 admin.site.site_header = 'Administracion de tablas Tienda'
+
+@admin.register(Talles)
+class TallesAdmin(admin.ModelAdmin):
+    list_per_page = 20
+    search_fields = ['nombre']
+    list_display = ['idtalle', 'nombre']
 
 class MarcasAdmin(admin.ModelAdmin):
     list_per_page = 20
