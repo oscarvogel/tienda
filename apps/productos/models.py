@@ -148,7 +148,7 @@ class Articulos(models.Model):
     etiqueta = models.CharField(max_length=200, blank=True)
     favoritos = models.ManyToManyField(User, related_name='fav_user', blank=True)
     codigo_barra = models.CharField(max_length=20, default='', blank=True)
-    slug = models.SlugField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True, blank=True)
 
     class Meta:
         managed = False
