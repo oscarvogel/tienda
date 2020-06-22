@@ -148,6 +148,7 @@ class Articulos(models.Model):
     etiqueta = models.CharField(max_length=200, blank=True)
     favoritos = models.ManyToManyField(User, related_name='fav_user', blank=True)
     codigo_barra = models.CharField(max_length=20, default='', blank=True)
+    slug = models.SlugField(max_length=200, db_index=True)
 
     class Meta:
         managed = False
@@ -201,8 +202,8 @@ class Stock(models.Model):
     descuenta = Bit1BooleanField(db_column='Descuenta', default=True)  # Field name made lowercase.
     formula = models.CharField(db_column='Formula', max_length=20, default='')  # Field name made lowercase.
     # descstock = Bit1BooleanField(db_column='DescStock', default=True)  # Field name made lowercase. This field type is a guess.
-    codbarraart = models.CharField(db_column='CodBarraArt', max_length=20, default='')  # Field name made lowercase.
-    codbarrabulto = models.CharField(db_column='CodBarraBulto', max_length=20, default='')  # Field name made lowercase.
+    codbarraart = models.CharField(db_column='CodBarraArt', max_length=20, default='', blank=True)  # Field name made lowercase.
+    codbarrabulto = models.CharField(db_column='CodBarraBulto', max_length=20, default='', blank=True)  # Field name made lowercase.
     # modificaprecios = Bit1BooleanField(db_column='ModificaPrecios', default=True)  # Field name made lowercase. This field type is a guess.
     imagen = models.CharField(db_column='Imagen', max_length=200, default='')  # Field name made lowercase.
     ultact = models.DateField(db_column='UltAct', default=datetime.now().date())  # Field name made lowercase.
