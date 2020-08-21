@@ -10,6 +10,42 @@ from apps.productos.models import Articulos, Historial
 def inicio(request):
     form_busqueda = SearchForm()
     form_categoria = CategoriasForm()
+    categorias_articulos = Paramsist.ObtenerValor('CATEGORIA_HOMBRES')
+    if categorias_articulos:
+        articulos_hombres = Articulos.objects.filter(
+            idgrupo__in=[x for x in categorias_articulos.split(',')],
+            disponible_web = True
+        ).order_by('-ult_act')[:8]
+    else:
+        articulos_hombres = None
+
+    categorias_articulos = Paramsist.ObtenerValor('CATEGORIA_MUJERES')
+    if categorias_articulos:
+        articulos_mujeres = Articulos.objects.filter(
+            idgrupo__in=[x for x in categorias_articulos.split(',')],
+            disponible_web = True
+        ).order_by('-ult_act')[:8]
+    else:
+        articulos_mujeres = None
+
+    categorias_articulos = Paramsist.ObtenerValor('CATEGORIA_DEPORTES')
+    if categorias_articulos:
+        articulos_deportes = Articulos.objects.filter(
+            idgrupo__in=[x for x in categorias_articulos.split(',')],
+            disponible_web = True
+        ).order_by('-ult_act')[:8]
+    else:
+        articulos_deportes = None
+
+    categorias_articulos = Paramsist.ObtenerValor('CATEGORIA_CALZADOS')
+    if categorias_articulos:
+        articulos_calzados = Articulos.objects.filter(
+            idgrupo__in=[x for x in categorias_articulos.split(',')],
+            disponible_web = True
+        ).order_by('-ult_act')[:8]
+    else:
+        articulos_calzados = None
+
     articulos = None
     historial = None
 
@@ -42,5 +78,9 @@ def inicio(request):
         'ofertas': ofertas,
         'historial': historial,
         'form_categoria': form_categoria,
+        'articulos_hombres': articulos_hombres,
+        'articulos_mujeres': articulos_mujeres,
+        'articulos_deportes': articulos_deportes,
+        'articulos_calzados': articulos_calzados
     })
 
