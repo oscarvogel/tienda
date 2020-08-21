@@ -2,7 +2,13 @@
 <section class="hero-section">
     <div class="hero-items owl-carousel">
         {% for h in hero.detallesecciones_set.all %}
-        <div class="single-hero-items set-bg" data-setbg="{{h.imagen.url}}">
+            {%if h.imagen%}
+                <div class="single-hero-items set-bg" data-setbg="{{h.imagen.url}}">
+            {%elif h.articulo.get_principal_image%}
+                <div class="single-hero-items set-bg" data-setbg="{{b.articulo.get_principal_image}}">
+            {%else%}
+                <div class="single-hero-items set-bg" data-setbg="{%get_media_prefix%}articulos/noimage.jpg">
+            {%endif%}
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
