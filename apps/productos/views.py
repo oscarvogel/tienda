@@ -44,7 +44,8 @@ def lista_productos(request, categoria_id=0, talle_id=0, marca_id=0):
         articulos_list = Articulos.objects.filter(disponible_web=True)
 
     if articulos_list:
-        paginator = Paginator(articulos_list, 18)
+        articulos_list = articulos_list.order_by('-ult_act')
+        paginator = Paginator(articulos_list, 6)
         try:
             articulos = paginator.page(page)
         except PageNotAnInteger:

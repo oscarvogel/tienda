@@ -54,6 +54,9 @@ class Grupos(models.Model):
     def __str__(self):
         return self.nombre
 
+    def get_absolute_url(self):
+        return reverse('productos:lista_producto_categoria', kwargs={'categoria_id': self.idgrupo})
+
 class Proveedores(models.Model):
     idproveedor = models.AutoField(db_column='idProveedor', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', max_length=50)  # Field name made lowercase.

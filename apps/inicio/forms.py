@@ -5,7 +5,10 @@ from apps.productos.models import Grupos, Marcas
 
 class SearchForm(forms.Form):
     search_field = forms.CharField(widget=forms.TextInput(
-        attrs={'placeholder': 'Que buscas?'}
+        attrs={
+            'placeholder': 'Que buscas?',
+            'type':'search',
+        }
     ), required=False)
     marcas = forms.ModelChoiceField(
         required=False,

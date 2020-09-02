@@ -1,0 +1,127 @@
+{% extends "elite_shoppy/index.html" %}
+{% load static %}
+{%block title%}{{articulo.nombre}}{%endblock%}
+{%block keywords%}{{articulo.nombre}}{%endblock%}
+{%block extrahead%}
+    <link href="{%static 'elite_shoppy/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+{%endblock%}
+{%block content%}
+<div class="page-head_agile_info_w3l">
+    <div class="container">
+        <h3>Articulo <span>{{articulo.nombre}} </span></h3>
+        <!--/w3_short-->
+             <div class="services-breadcrumb">
+                <div class="agile_inner_breadcrumb">
+                   <ul class="w3_short">
+                        <li><a href="{%url 'inicio:inicio' %}">Inicio</a><i>|</i></li>
+                        <li>{{articulo.nombre}}</li>
+                    </ul>
+                 </div>
+            </div>
+   <!--//w3_short-->
+    </div>
+</div>
+<!-- banner-bootom-w3-agileits -->
+<div class="banner-bootom-w3-agileits">
+	<div class="container">
+	     <div class="col-md-4 single-right-left ">
+			<div class="grid images_3_of_2">
+				<div class="flexslider">
+					<ul class="slides">
+                        {%for img in articulo.imagenarticulo_set.all%}
+                            {%if img.imagen%}
+                                <li data-thumb="{%static 'elite_shoppy/images/d2.jpg' %}">
+                                    <div class="thumb-image"> <img src="{{img.imagen.url}}" data-imagezoom="true" class="img-responsive"> </div>
+                                </li>
+                            {%endif%}
+                        {%endfor%}
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8 single-right-left simpleCart_shelfItem">
+            <h3>{{articulo.nombre}}</h3>
+            <p><span class="item_price">${{articulo.preciopub}}</span> <del>- ${{articulo.get_price_increment}}</del></p>
+					<div class="rating1">
+
+					</div>
+					<div class="description">
+                        {{articulo.idgrupo.nombre}}
+					</div>
+                    <form action="{% url 'cart:cart_add' articulo.idarticulo %}" method="post">
+                        {% csrf_token %}
+                        {{cart_product_form.size}}
+                        {{cart_product_form.color}}
+					<div class="color-quality">
+						<div class="color-quality-right">
+							<h5>Cantidad :</h5>
+                            {{cart_product_form.quantity}}
+						</div>
+					</div>
+					<div class="occasional">
+						<h5>Color :</h5>
+                        {%for c in colores%}
+                            <div class="colr ert">
+                                <label class="radio"><input type="radio" name="radio" id="{{c.id.color}}" checked=""><i></i>{{c.nombre}}</label>
+                            </div>
+                        {%endfor%}
+						<div class="clearfix"> </div>
+					</div>
+                        {{cart_product_form.update}}
+                        <input type="submit" name="submit" value="Agregar Carrito" class="button" />
+                    </form>
+					<ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
+                       <li class="share">Comparti : </li>
+                        <li><a href="#" class="facebook">
+                              <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                              <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                        <li><a href="#" class="twitter">
+                              <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                              <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                        <li><a href="#" class="instagram">
+                              <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                              <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                        <li><a href="#" class="pinterest">
+                              <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                              <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
+                    </ul>
+		      </div>
+	 			<div class="clearfix"> </div>
+				<!-- /new_arrivals -->
+	        <div class="responsive_tabs_agileits">
+				<div id="horizontalTab">
+						<ul class="resp-tabs-list">
+							<li>Descripcion</li>
+						</ul>
+					<div class="resp-tabs-container">
+					<!--/tab_one-->
+					   <div class="tab1">
+							<div class="single_page_agile_its_w3ls">
+							  <h6>{{articulo.nombre}}</h6>
+							   <p>{{articulo.descripcion}}</p>
+							   <p class="w3ls_para"></p>
+							</div>
+						</div>
+						<!--//tab_one-->
+					</div>
+				</div>
+			</div>
+	<!-- //new_arrivals -->
+	  	<!--/slider_owl-->
+
+			<div class="w3_agile_latest_arrivals">
+			<h3 class="wthree_text_info">Te puede <span>Interesar</span></h3>
+                {%for a in relacionados%}
+                    <div class="col-md-3 product-men">
+                        {%include 'elite_shoppy/productos/detalle-articulo.html' %}
+                    </div>
+                {%endfor%}
+    			<div class="clearfix"> </div>
+					<!--//slider_owl-->
+	        </div>
+	   </div>
+ </div>
+<!--//single_page-->
+
+{%endblock%}
