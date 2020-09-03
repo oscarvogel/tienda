@@ -31,7 +31,7 @@
 					<ul class="slides">
                         {%for img in articulo.imagenarticulo_set.all%}
                             {%if img.imagen%}
-                                <li data-thumb="{%static 'elite_shoppy/images/d2.jpg' %}">
+                                <li data-thumb="{{img.imagen.url}}">
                                     <div class="thumb-image"> <img src="{{img.imagen.url}}" data-imagezoom="true" class="img-responsive"> </div>
                                 </li>
                             {%endif%}
