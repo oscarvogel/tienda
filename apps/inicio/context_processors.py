@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
 from apps.inicio.models import Paramsist
@@ -20,6 +21,25 @@ def paramsist_processors(request):
         favoritos_usuario = User.objects.get(username=request.user).fav_user.count()
     except:
         favoritos_usuario = 0
+    form_usuario = AuthenticationForm()
+
+    categorias_articulos = Paramsist.ObtenerValor('CATEGORIA_HOMBRES')
+    if categorias_articulos:
+        categorias_hombres = Grupos.objects.filter(
+            idgrupo__in=[x for x in categorias_articulos.split(',')],
+            habilita_web = True
+        )
+    else:
+        categorias_hombres = None
+
+    categorias_articulos = Paramsist.ObtenerValor('CATEGORIA_MUJERES')
+    if categorias_articulos:
+        categorias_mujeres = Grupos.objects.filter(
+            idgrupo__in=[x for x in categorias_articulos.split(',')],
+            habilita_web = True
+        )
+    else:
+        categorias_mujeres = None
 
     return {
         'fb_url': fb_url,
@@ -32,4 +52,7 @@ def paramsist_processors(request):
         'categorias': categorias,
         'marcas': marcas,
         'favoritos_usuario': favoritos_usuario,
+        'form_usuario':form_usuario,
+        'categorias_hombres':categorias_hombres,
+        'categorias_mujeres':categorias_mujeres,
     }

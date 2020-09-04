@@ -1,5 +1,6 @@
 from os.path import join
 
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
 # Create your views here.
 from apps.inicio.forms import SearchForm, CategoriasForm
@@ -81,6 +82,6 @@ def inicio(request):
         'articulos_hombres': articulos_hombres,
         'articulos_mujeres': articulos_mujeres,
         'articulos_deportes': articulos_deportes,
-        'articulos_calzados': articulos_calzados
+        'articulos_calzados': articulos_calzados,
     })
 

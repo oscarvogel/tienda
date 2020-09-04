@@ -3,7 +3,7 @@
 	<div class="header-bot_inner_wthreeinfo_header_mid">
 		<div class="col-md-4 header-middle">
 			<form action="{%url 'productos:lista_productos' %}" method="post">
-                {% csrf_token %}
+                    {% csrf_token %}
                     {{form.search_field}}
 					<input type="submit" value=" ">
 				<div class="clearfix"></div>
