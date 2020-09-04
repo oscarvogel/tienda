@@ -104,3 +104,43 @@ def favorito_articulo(request):
         except:
             pass
     return JsonResponse({'status': 'ko'})
+
+@login_required(login_url='usuarios:login')
+def lista_categoria(request, tipo=''):
+    form_busqueda = SearchForm()
+    form_categoria = CategoriasForm()
+    articulos = None
+    historial = None
+    articulos_list = None
+    page = request.GET.get('page', 1)
+
+    template = join(Paramsist.ObtenerValor("CARPETA_TEMA"), "productos", "lista_productos.html")
+
+    categorias_articulos = Paramsist.ObtenerValor(tipo)
+    if categorias_articulos:
+        articulos_list = Articulos.objects.filter(
+            idgrupo__in=[x for x in categorias_articulos.split(',')],
+            disponible_web = True
+        ).order_by('-ult_act')
+    else:
+        articulos_list = None
+
+    if articulos_list:
+        articulos_list = articulos_list.order_by('-ult_act')
+        paginator = Paginator(articulos_list, 6)
+        try:
+            articulos = paginator.page(page)
+        except PageNotAnInteger:
+            articulos = paginator.page(1)
+        except EmptyPage:
+            articulos = paginator.page(paginator.num_pages)
+
+    if request.user.is_authenticated:
+        historial = Historial.objects.filter(usuario=request.user).order_by('-fecha')[:10]
+
+    return render(request, template_name=template, context={
+        'articulos': articulos,
+        'form': form_busqueda,
+        'historial': historial,
+        'form_categoria': form_categoria,
+    })

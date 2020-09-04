@@ -19,7 +19,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta name="keywords" content="Luly Deportes Puerto Rico Misiones {%block keywords%}{%endblock%}" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--//tags -->
+{%block facebook%}
+<!--facebook tags-->
+<meta property="og:url"           content="{{url_web}}" />
+<meta property="og:description"   content="Luly Deportes, Puerto Rico, Misiones, Remeras, Chombas" />
+<meta property="og:image"         content="{{url_web}}{{logo}}" />
+{%endblock%}
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content="Luly Deportes, Puerto Rico, Misiones" />
+
+	<!--//tags -->
 <link href="{%static 'elite_shoppy/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link href="{%static 'elite_shoppy/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link href="{%static 'elite_shoppy/css/font-awesome.css' %}" rel="stylesheet">
@@ -204,24 +213,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="{%static 'elite_shoppy/js/easy-responsive-tabs.js' %}"></script>
 <script>
 	$(document).ready(function () {
-	$('#horizontalTab').easyResponsiveTabs({
-	type: 'default', //Types: default, vertical, accordion           
-	width: 'auto', //auto or any width like 600px
-	fit: true,   // 100% fit in a container
-	closed: 'accordion', // Start closed if in accordion view
-	activate: function(event) { // Callback function if tab is switched
-	var $tab = $(this);
-	var $info = $('#tabInfo');
-	var $name = $('span', $info);
-	$name.text($tab.text());
-	$info.show();
-	}
-	});
-	$('#verticalTab').easyResponsiveTabs({
-	type: 'vertical',
-	width: 'auto',
-	fit: true
-	});
+		$('#horizontalTab').easyResponsiveTabs({
+			type: 'default', //Types: default, vertical, accordion
+			width: 'auto', //auto or any width like 600px
+			fit: true,   // 100% fit in a container
+			closed: 'accordion', // Start closed if in accordion view
+			activate: function(event) { // Callback function if tab is switched
+				var $tab = $(this);
+				var $info = $('#tabInfo');
+				var $name = $('span', $info);
+				$name.text($tab.text());
+				$info.show();
+			}
+		});
+		$('#verticalTab').easyResponsiveTabs({
+			type: 'vertical',
+			width: 'auto',
+			fit: true
+		});
 	});
 </script>
 <!-- //script for responsive tabs -->		
@@ -284,5 +293,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </script>
  {% block extrajs %}
  {% endblock %}
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f52abc0cefff1f4"></script>
+
 </body>
 </html>

@@ -6,6 +6,7 @@ from apps.productos.models import Grupos, Marcas
 
 
 def paramsist_processors(request):
+    url_web = Paramsist.ObtenerValor("URL_WEB")
     fb_url = Paramsist.ObtenerValor("URL_FACEBOOK")
     logo = Paramsist.ObtenerValor("LOGO")
     whatsapp = Paramsist.ObtenerValor("WHATSAPP")
@@ -42,6 +43,7 @@ def paramsist_processors(request):
         categorias_mujeres = None
 
     return {
+        'url_web':url_web,
         'fb_url': fb_url,
         'logo': logo,
         'email': email,
